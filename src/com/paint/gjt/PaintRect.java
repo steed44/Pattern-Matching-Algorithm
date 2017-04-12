@@ -16,6 +16,6 @@ public class PaintRect {
 	public void drawRwct(Graphics g){
 		g.drawRect(x+5, y+5, 30, 30);
 		g.setFont(new Font("宋体",Font.BOLD,30));
-		g.drawString(chString, x+10, y+30);
+		g.drawString(chString, x+5, y+30);
 	}
 }

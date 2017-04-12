@@ -36,7 +36,7 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 	public void reset() {
 		bfAlgorithm = BFAlgorithm.parseGson();
 		k = 0;
-		
+
 	}
 
 	public void paint(Graphics g) {
@@ -45,11 +45,14 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 		if (bfAlgorithm != null) {
 			switch (panelNum) {
 			case 0:
-				g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
-				g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
-				g.setColor(Color.BLACK);
-				for (int i = 0; i < bf.bfStrings.length; i++) {
-					g.drawString(bf.bfStrings[i], 5, 20 + i * 20);
+				if (k < bfAlgorithm.getListI().size()) {
+					g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
+					g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
+					g.setColor(Color.BLACK);
+					for (int i = 0; i < bf.bfStrings.length; i++) {
+						g.drawString(bf.bfStrings[i], 5, 20 + i * 20);
+					}
+
 				}
 				break;
 			case 1:
@@ -60,8 +63,7 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 				break;
 			}
 
-		}
-		else{
+		} else {
 			switch (panelNum) {
 			case 0:
 				g.fillRect(2, 20 - 15, 1000, 20);
@@ -84,21 +86,19 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-
-		if (e.getActionCommand().equals("上一步")) {
-			 if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
-			 k--;
-			 repaint();
-			 }
-
-		}
-		if (e.getActionCommand().equals("下一步")) {
-			 if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
-			 k++;
-			 repaint();
-			 }
-
+		if (bfAlgorithm != null) {
+			if (e.getActionCommand().equals("上一步")) {
+				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
+					k--;
+					repaint();
+				}
+			}
+			if (e.getActionCommand().equals("下一步")) {
+				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
+					k++;
+					repaint();
+				}
+			}
 		}
 
 	}
@@ -106,15 +106,13 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		 k++;
-		 repaint();
+		k++;
+		repaint();
 	}
-	
 
 	public void setK(int k) {
 		this.k = k;
 	}
-	
 
 	public int getK() {
 		return k;

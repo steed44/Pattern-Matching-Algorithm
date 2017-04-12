@@ -59,20 +59,24 @@ public class VarPanel extends JPanel implements Runnable, ActionListener,ChangeL
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getActionCommand().equals("上一步")) {
-			 if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
-			 k--;
-			 repaint();
-			 }
+		if (bfAlgorithm != null){
+			if (e.getActionCommand().equals("上一步")) {
+				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
+					k--;
+					repaint();
+				}
 
-		}
-		if (e.getActionCommand().equals("下一步")) {
-			 if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
-			 k++;
-			 repaint();
-			 }
+			}
+			if (e.getActionCommand().equals("下一步")) {
+				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
+					k++;
+					repaint();
+				}
 
+			}
+			
 		}
+		
 	}
 	@Override
 	public void run() {

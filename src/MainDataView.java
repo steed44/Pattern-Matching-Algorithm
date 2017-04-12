@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.Font;
 
 public class MainDataView extends JPanel{
-	private JTextField textField;
-	private JTextField textField_1;
+	protected JTextField textField;
+	protected JTextField textField_1;
 	protected JButton btnNewButton;
 	private GetData getData;
 	private ConcreteSubject concreteSubject;

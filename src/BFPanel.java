@@ -83,11 +83,13 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 
 	@Override
 	public void run() {
-
-		star = bfAlgorithm.getListNow().get(++k) * 30;
+		if(k < bfAlgorithm.getListI().size()){
+			star = bfAlgorithm.getListNow().get(++k) * 30;
 		pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
 				bfAlgorithm.getListJ().get(k) * 30 + star, 90);
 		repaint();
+		}
+		
 	}
 
 	@Override

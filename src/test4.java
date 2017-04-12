@@ -4,9 +4,13 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+
 import java.awt.BorderLayout;
 
 public class test4 implements ActionListener, ChangeListener {
@@ -18,6 +22,7 @@ public class test4 implements ActionListener, ChangeListener {
 	private VariablePanel variablePanel;
 	private Timer timer = null;
 	private int m = 1;
+	private MenuBarTool menuBarTool;
 
 	/**
 	 * Launch the application.
@@ -49,8 +54,9 @@ public class test4 implements ActionListener, ChangeListener {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1200, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("模式匹配辅助教学工具");
 		// 添加菜单栏
-		MenuBarTool menuBarTool = new MenuBarTool();
+		menuBarTool = new MenuBarTool();
 		frame.getContentPane().add(menuBarTool, BorderLayout.NORTH);
 		// 左右分栏
 		JSplitPane splitPane = new JSplitPane();
@@ -95,7 +101,38 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.addChangeListener(variablePanel.panel);
 
 		mainDataView.btnNewButton.addActionListener(this);
+		menuBarTool.sample_1.addMenuListener(new sample_1_ActionListener());
+		menuBarTool.sample_2.addMenuListener(new sample_1_ActionListener());
+		menuBarTool.sample_3.addMenuListener(new sample_1_ActionListener());
 
+	}
+
+	// 示例Jmenu的监听事件处理
+	private class sample_1_ActionListener implements MenuListener {
+
+		@Override
+		public void menuCanceled(MenuEvent arg0) {
+		}
+
+		@Override
+		public void menuDeselected(MenuEvent arg0) {
+		}
+
+		@Override
+		public void menuSelected(MenuEvent arg0) {
+			if (arg0.getSource().equals(menuBarTool.sample_1)) {
+				mainDataView.textField.setText("aaaaaaaaaaab");
+				mainDataView.textField_1.setText("aaab");
+			}
+			if (arg0.getSource().equals(menuBarTool.sample_2)) {
+				mainDataView.textField.setText("abacbcadabacefsd");
+				mainDataView.textField_1.setText("abace");
+			}
+			if (arg0.getSource().equals(menuBarTool.sample_3)) {
+				mainDataView.textField.setText("四是四,十是十,十四是十四,四十是四十.");
+				mainDataView.textField_1.setText("四十");
+			}
+		}
 	}
 
 	class MyTask extends TimerTask {
@@ -105,10 +142,13 @@ public class test4 implements ActionListener, ChangeListener {
 		public void run() {
 			switch (codePanel.getPanelNum()) {
 			case 0:
-				if(viewPanel.bfPanel.k >= viewPanel.bfPanel.bfAlgorithm.getListI().size()){
+				if (viewPanel.bfPanel.k >= viewPanel.bfPanel.bfAlgorithm.getListI().size()) {
 					timer.cancel();
+					viewPanel.bfPanel.isStart = 0;
+				} else {
+					thread1 = new Thread(viewPanel.bfPanel);
 				}
-				thread1 = new Thread(viewPanel.bfPanel);
+
 				break;
 			case 1:
 				break;
@@ -137,10 +177,20 @@ public class test4 implements ActionListener, ChangeListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("更新")) {
-			mainDataView.reset();
-			codePanel.reset();
-			viewPanel.bfPanel.reset();
-			variablePanel.panel.reset();
+			if (viewPanel.bfPanel.isStart == 1) {
+				timer.cancel();
+				viewPanel.bfPanel.isStart = 0;
+			}
+			// 这里要添加一个异常检错,不然在数据框没有内容的时候点击更新会出错
+			if (mainDataView.textField.getText().equals("") || mainDataView.textField_1.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "请输入字符串!");
+			} else {
+				mainDataView.reset();
+				codePanel.reset();
+				viewPanel.bfPanel.reset();
+				variablePanel.panel.reset();
+			}
+
 		} else if (e.getActionCommand().equals("开始")) {
 
 			switch (codePanel.getPanelNum()) {

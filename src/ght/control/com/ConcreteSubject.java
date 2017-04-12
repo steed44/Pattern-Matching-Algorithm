@@ -11,10 +11,9 @@ public class ConcreteSubject extends Observable {
 
 	public void setGetData(GetData getData) {
 		this.getData = getData;
-		
+
 		this.setChanged();
 		this.notifyObservers(getData);
 	}
-	
-	
+
 }

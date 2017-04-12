@@ -1,10 +1,12 @@
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,6 +14,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public class test4 implements ActionListener, ChangeListener {
 
@@ -55,6 +58,8 @@ public class test4 implements ActionListener, ChangeListener {
 		frame.setBounds(100, 100, 1200, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("模式匹配辅助教学工具");
+		//设置全屏显示
+		//frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		// 添加菜单栏
 		menuBarTool = new MenuBarTool();
 		frame.getContentPane().add(menuBarTool, BorderLayout.NORTH);
@@ -82,6 +87,11 @@ public class test4 implements ActionListener, ChangeListener {
 		mainDataView = new MainDataView();
 		splitPane_2.setLeftComponent(mainDataView);
 		// 添加代码显示区
+		
+//		JScrollPane jScrollPane = new JScrollPane(codePanel);
+//		jScrollPane.setPreferredSize(new Dimension(200, 500));
+//		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//		jScrollPane.setViewportView(codePanel);
 		codePanel = new CodePanel();
 		splitPane.setRightComponent(codePanel);
 		// 添加变量显示区

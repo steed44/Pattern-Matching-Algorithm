@@ -41,17 +41,17 @@ public class test1 {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1024, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
+
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setVgap(15);
-		
-		//添加菜单栏
-		
+
+		// 添加菜单栏
+
 	}
 
 }

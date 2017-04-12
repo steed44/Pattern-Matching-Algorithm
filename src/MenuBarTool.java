@@ -2,6 +2,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuBarTool extends JMenuBar {
 
@@ -57,7 +59,7 @@ public class MenuBarTool extends JMenuBar {
 		sample_2.add(sample_2_2);
 		sample_2_1.setEnabled(false);
 		sample_2_2.setEnabled(false);
-		
+
 		sample.add(sample_3);
 		sample_3_1 = new JMenuItem("主串:四是四,十是十,十四是十四,四十是四十.");
 		sample_3_1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 18));
@@ -75,6 +77,22 @@ public class MenuBarTool extends JMenuBar {
 		// 添加编辑菜单
 		help = new JMenu("帮助");
 		menuBar.add(help);
+
+		BF_Item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		KMP_Item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		BM_Item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 	}
 
 }

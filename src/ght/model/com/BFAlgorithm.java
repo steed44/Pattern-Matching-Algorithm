@@ -8,16 +8,16 @@ import java.io.IOException;
 import java.io.WriteAbortedException;
 import java.util.ArrayList;
 
-
 import com.google.gson.Gson;
 
 public class BFAlgorithm {
 	private String textStr, patternStr; // 主串和模式串
 	private int textStrLength, patternStrLength; // 主串长度和模式串长度
 	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
-	private ArrayList<Character> listCharI, listCharJ;
+	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 	private int now = 0;
 	private int i = 0, j = 0;
+
 	public BFAlgorithm(String textStr, String patternStr) {
 		this.textStr = textStr;
 		this.textStrLength = textStr.length();
@@ -30,70 +30,66 @@ public class BFAlgorithm {
 		listCharI = new ArrayList<Character>();
 		listCharJ = new ArrayList<Character>();
 	}
-	
-	public void writeList(int row){
+
+	public void writeList(int row) {
 		listI.add(i);
 		listJ.add(j);
-		if (i == textStrLength && i != 0){
-			listCharI.add(textStr.charAt(i-1));
-		}
-		else{
+		if (i == textStrLength && i != 0) {
+			listCharI.add(textStr.charAt(i - 1));
+		} else {
 			listCharI.add(textStr.charAt(i));
 		}
-		
-		if (j == patternStrLength && j != 0){
-			listCharJ.add(patternStr.charAt(j-1));
-		}
-		else {
+
+		if (j == patternStrLength && j != 0) {
+			listCharJ.add(patternStr.charAt(j - 1));
+		} else {
 			listCharJ.add(patternStr.charAt(j));
 		}
-		
+
 		listNow.add(now);
 		listRow.add(row);
 	}
+
 	// BF算法主体
 	public int mainAlgorithm() {
 		now = 0;
 		i = 0;
 		j = 0;
-		for(int k = 1; k <=4; k++){
+		for (int k = 1; k <= 4; k++) {
 			writeList(k);
 		}
-		while (i<textStrLength && j<patternStrLength) {
+		while (i < textStrLength && j < patternStrLength) {
 			writeList(5);
-			if(textStr.charAt(i)==patternStr.charAt(j)){
+			if (textStr.charAt(i) == patternStr.charAt(j)) {
 				writeList(6);
 				++i;
 				writeList(7);
 				++j;
 				writeList(8);
 				writeList(4);
-			}
-			else{
+			} else {
 				writeList(9);
 				writeList(10);
-				j=0;
+				j = 0;
 				writeList(11);
-				i=++now;
+				i = ++now;
 				writeList(12);
 				writeList(4);
 			}
 		}
 		writeList(13);
 		writeList(14);
-		if(j == patternStrLength){
+		if (j == patternStrLength) {
 			writeList(15);
 			writeList(20);
 			return now;
-		}
-		else {
+		} else {
 			writeList(17);
 			writeList(18);
 			writeList(20);
 			return -1;
 		}
-	}	
-		
+	}
 
 	// 生成json文件
 	public void creatGson() {
@@ -171,5 +167,4 @@ public class BFAlgorithm {
 		return listCharJ;
 	}
 
-	
 }

@@ -1,10 +1,12 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
@@ -14,6 +16,9 @@ import com.paint.gjt.PaintIndicator;
 
 import ght.model.com.BF;
 import ght.model.com.BFAlgorithm;
+import ght.model.com.KMP;
+import ght.model.com.KMPAlgorithm;
+
 import java.awt.BorderLayout;
 
 public class CodePanel extends JPanel implements Runnable, ActionListener, ChangeListener {
@@ -22,7 +27,9 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 	 * Create the panel.
 	 */
 	private BF bf = new BF();
+	private KMP kmp = new KMP();
 	private BFAlgorithm bfAlgorithm = null;
+	private KMPAlgorithm kmpAlgorithm = null;
 	private int panelNum = 0;
 	private int k = 0;
 	protected Thread thread = new Thread(this);
@@ -30,11 +37,18 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 	public CodePanel() {
 		setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		setLayout(new BorderLayout(0, 0));
+		//setPreferredSize(new Dimension(500, 1000));
+		//setSize(500, 1000); // 两句一起写才有效果，不知道为什么
 		setBackground(Color.WHITE);
+//		JScrollPane jScrollPane = new JScrollPane(this);
+//		jScrollPane.setPreferredSize(new Dimension(300, 500));
+//		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//		jScrollPane.setViewportView(this);
 	}
 
 	public void reset() {
 		bfAlgorithm = BFAlgorithm.parseGson();
+		kmpAlgorithm= KMPAlgorithm.parseGson();
 		k = 0;
 
 	}
@@ -46,16 +60,23 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 			switch (panelNum) {
 			case 0:
 				if (k < bfAlgorithm.getListI().size()) {
-					g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
+					g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 500, 20);
 					g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
 					g.setColor(Color.BLACK);
 					for (int i = 0; i < bf.bfStrings.length; i++) {
 						g.drawString(bf.bfStrings[i], 5, 20 + i * 20);
 					}
-
 				}
 				break;
 			case 1:
+				//if (k < bfAlgorithm.getListI().size()) {
+					//g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
+					g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
+					g.setColor(Color.BLACK);
+					for (int i = 0; i < kmp.kmpStr.length; i++) {
+						g.drawString(kmp.kmpStr[i], 5, 20 + i * 20);
+					}
+				//}
 				break;
 			case 2:
 				break;
@@ -66,7 +87,7 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 		} else {
 			switch (panelNum) {
 			case 0:
-				g.fillRect(2, 20 - 15, 1000, 20);
+				g.fillRect(2, 20 - 15, 500, 20);
 				g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
 				g.setColor(Color.BLACK);
 				for (int i = 0; i < bf.bfStrings.length; i++) {
@@ -74,6 +95,12 @@ public class CodePanel extends JPanel implements Runnable, ActionListener, Chang
 				}
 				break;
 			case 1:
+				g.fillRect(2,0, 1000, 20);
+				g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
+				g.setColor(Color.BLACK);
+				for (int i = 0; i < kmp.kmpStr.length; i++) {
+					g.drawString(kmp.kmpStr[i], 5, 20 + i * 20);
+				}
 				break;
 			case 2:
 				break;

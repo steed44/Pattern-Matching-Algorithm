@@ -43,7 +43,7 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 		controlBtnPanel.btnNewButton_3.setActionCommand("上一步");
 	}
 
-	//复位函数
+	// 复位函数
 	public void reset() {
 		bfAlgorithm = BFAlgorithm.parseGson();
 		pIndicator = null;
@@ -83,13 +83,13 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 
 	@Override
 	public void run() {
-		if(k < bfAlgorithm.getListI().size()){
+		if (k < bfAlgorithm.getListI().size()) {
 			star = bfAlgorithm.getListNow().get(++k) * 30;
-		pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
-				bfAlgorithm.getListJ().get(k) * 30 + star, 90);
-		repaint();
+			pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
+					bfAlgorithm.getListJ().get(k) * 30 + star, 90);
+			repaint();
 		}
-		
+
 	}
 
 	@Override

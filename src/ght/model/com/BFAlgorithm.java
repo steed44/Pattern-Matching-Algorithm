@@ -29,6 +29,7 @@ public class BFAlgorithm {
 		listNow = new ArrayList<Integer>();
 		listCharI = new ArrayList<Character>();
 		listCharJ = new ArrayList<Character>();
+		now = 0;
 	}
 
 	public void writeList(int row) {

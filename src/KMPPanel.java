@@ -56,7 +56,7 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 	public void paint(Graphics g) {
 		super.paint(g);
 		if (kmpAlgorithm != null) {
-			if (pIndicator == null) {
+			if (pIndicator == null || kmpAlgorithm.getListRow().get(k) <= 20) {
 				pIndicator = new PaintIndicator(80, 30, 80, 120);
 			}
 			g.setFont(new Font("宋体", Font.BOLD, 30));
@@ -74,11 +74,12 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 			pIndicator.drawTextIndicator(g);
 			pIndicator.drawPatternIndicator(g);
 		}
+		
 		g.setFont(new Font("宋体", Font.BOLD, 22));
-		g.drawString("next[]:", 5, 240);
+		g.drawString("next[]:", 5, 225);
 		if (kmpAlgorithm.getListRow().get(k) < 18) {
 			for (int i = 0; i < kmpAlgorithm.getSubstr().length(); i++) {
-				if (i < kmpAlgorithm.getListJ().get(k)) {
+				if (i <= kmpAlgorithm.getListJ().get(k)) {
 					q = new PaintRect((String.valueOf(kmpAlgorithm.getNext()[i])), i * 30 + 80, 200);
 					q.drawRwct(g, i);
 				} else {
@@ -101,9 +102,9 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 			if (e.getActionCommand().equals("上一步")) {
 				if (k > 0 && k < kmpAlgorithm.getListI().size() - 1) {
 					k--;
-					// star = kmpAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30, 30,
-							kmpAlgorithm.getListJ().get(k) * 30 + star, 90);
+					star = kmpAlgorithm.getListNow().get(k) * 30;
+					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30+80, 30,
+							kmpAlgorithm.getListJ().get(k) * 30 +star+80, 120);
 					repaint();
 				}
 
@@ -111,9 +112,9 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 			if (e.getActionCommand().equals("下一步")) {
 				if (k >= 0 && k < kmpAlgorithm.getListI().size() - 2) {
 					k++;
-					// star = kmpAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30, 30,
-							kmpAlgorithm.getListJ().get(k) * 30 + star, 90);
+					star = kmpAlgorithm.getListNow().get(k) * 30;
+					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30+80, 30,
+							kmpAlgorithm.getListJ().get(k) * 30 +star+80, 120);
 					repaint();
 				}
 			}

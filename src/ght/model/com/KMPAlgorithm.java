@@ -12,8 +12,8 @@ import com.google.gson.Gson;
 public class KMPAlgorithm {
 	private String substr, str;
 	protected int[] next = null;
-	protected int j, i;
-	private ArrayList<Integer> listI, listJ, listRow; // 记录i的值，j的值，和行号
+	protected int j, i, now = 0;
+	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 
 	public KMPAlgorithm(String str, String substr) {
@@ -22,10 +22,11 @@ public class KMPAlgorithm {
 		next = new int[substr.length()];
 		listI = new ArrayList<Integer>();
 		listJ = new ArrayList<Integer>();
-		// listK = new ArrayList<Integer>();
+		listNow = new ArrayList<Integer>();
 		listRow = new ArrayList<Integer>();
 		listCharI = new ArrayList<Character>();
 		listCharJ = new ArrayList<Character>();
+		now = 0;
 		getNextArry();
 	}
 
@@ -35,6 +36,7 @@ public class KMPAlgorithm {
 		listCharI.add(a);
 		listCharJ.add(b);
 		listRow.add(row);
+		listNow.add(now);
 	}
 
 	// KMP算法主体
@@ -55,6 +57,7 @@ public class KMPAlgorithm {
 			} else {
 				writeList(i, j, ' ', ' ', 26);
 				j = next[j];
+				//添加now值,以便记录位置
 				writeList(i, j, ' ', ' ', 27);
 				writeList(i, j, ' ', ' ', 28);
 				if (j == -1) {
@@ -66,6 +69,13 @@ public class KMPAlgorithm {
 					writeList(i, j, ' ', ' ', 32);
 					writeList(i, j, ' ', ' ', 21);
 				}
+				if (j == 0){
+					now = i;
+				}
+				else {
+					now += substr.length()-j-1; 
+				}
+				
 				writeList(i, j, ' ', ' ', 32);
 				writeList(i, j, ' ', ' ', 21);
 			}
@@ -97,6 +107,7 @@ public class KMPAlgorithm {
 		writeList(i, j, ' ', ' ',4);
 		while (j < substr.length() - 1) {
 			writeList(i, j, ' ', ' ', 5);
+			//这里可以加一个判断i的值,流程添加不完善,要改
 			if (i == -1 || substr.charAt(j) == substr.charAt(i)) {
 				writeList(i, j, substr.charAt(j+1), substr.charAt(i+1), 6);
 				if (substr.charAt(j + 1) == substr.charAt(i + 1)) {
@@ -238,6 +249,22 @@ public class KMPAlgorithm {
 
 	public int[] getNext() {
 		return next;
+	}
+
+	public int getNow() {
+		return now;
+	}
+
+	public void setNow(int now) {
+		this.now = now;
+	}
+
+	public ArrayList<Integer> getListNow() {
+		return listNow;
+	}
+
+	public void setListNow(ArrayList<Integer> listNow) {
+		this.listNow = listNow;
 	}
 	
 }

@@ -41,7 +41,6 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 		if (bfAlgorithm != null) {
 			switch (panelNum) {
 			case 0:
-				g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
 				g.setColor(Color.CYAN);
 				if (k != 0) {
 					g.fillRect(charX + 25 * k + 50, 0, 25, 600);
@@ -56,7 +55,6 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				}
 				break;
 			case 1:
-
 				break;
 			case 2:
 				break;
@@ -64,33 +62,33 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				break;
 			}
 
-		} else {
-			switch (panelNum) {
-			case 0:
-				g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
-				g.drawString("i", charX + 40, charY);
-				g.drawString("charAt(i)", charX, charY + 22);
-				g.drawString("j", charX + 40, charY + 44);
-				g.drawString("charAt(j)", charX, charY + 66);
-				// 添加设置jspanel大小的代码
-
-				break;
-			case 1:
-				g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
-				g.drawString("i", charX + 40, charY);
-				g.drawString("charAt(i)", charX, charY + 22);
-				g.drawString("j", charX + 40, charY + 44);
-				g.drawString("charAt(j)", charX, charY + 66);
-				g.drawString("next[i]", charX, charY + 88);
-				// 添加设置jspanel大小的代码
-
-				break;
-			case 2:
-				break;
-			default:
-				break;
-			}
 		}
+		switch (panelNum) {
+		case 0:
+			g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
+			g.drawString("i", charX + 40, charY);
+			g.drawString("charAt(i)", charX, charY + 22);
+			g.drawString("j", charX + 40, charY + 44);
+			g.drawString("charAt(j)", charX, charY + 66);
+			// 添加设置jspanel大小的代码
+
+			break;
+		case 1:
+			g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
+			g.drawString("i", charX + 40, charY);
+			g.drawString("charAt(i)", charX, charY + 22);
+			g.drawString("j", charX + 40, charY + 44);
+			g.drawString("charAt(j)", charX, charY + 66);
+			g.drawString("next[i]", charX, charY + 88);
+			// 添加设置jspanel大小的代码
+
+			break;
+		case 2:
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	public void reset() {
@@ -134,7 +132,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 		// TODO Auto-generated method stub
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		panelNum = tabbedPane.getSelectedIndex();
-		k=0;
+		k = 0;
 		repaint();
 	}
 

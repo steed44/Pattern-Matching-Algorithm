@@ -6,7 +6,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class ViewPanel extends JTabbedPane implements ChangeListener {
+public class ViewPanel extends JTabbedPane {
 
 	/**
 	 * Create the panel.
@@ -25,24 +25,6 @@ public class ViewPanel extends JTabbedPane implements ChangeListener {
 		addTab("BF算法", null, bfPanel, null);
 		addTab("KMP算法", null, kmpPanel, null);
 		addTab("BM算法", null, bmPanel, null);
-		addChangeListener(this);
 	}
 
-	public void reset() {
-
-	}
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		switch (this.getSelectedIndex()) {
-		case 0:
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		default:
-			break;
-		}
-	}
 }

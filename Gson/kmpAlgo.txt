@@ -5,21 +5,25 @@
 "        if (i == -1 || substr.charAt(j) == substr.charAt(i)) {",
 "            if (substr.charAt(j + 1) == substr.charAt(i + 1)) {",
 "                next[++j] = next[++i];",
-"            } else {",
+"            } 
+			 else {",
 "                next[++j] = ++i;",
 "            }",
-"        } else {",
+"        } 
+		 else {",
 "            i = next[i];",
 "        }",
 "    }",
 "}",
+
 "public int mainAlgorithm() {",
 "    int i = 0, j = 0;",
 "    while (i < str.length() && j < substr.length()) {",
 "        if (str.charAt(i) == substr.charAt(j)) {",
 "            ++i;",
 "            ++j;",
-"        } else {",
+"        } 
+		 else {",
 "            j = next[j];",
 "            if (j == -1) {",
 "                j = 0;",
@@ -29,7 +33,8 @@
 "    }",
 "    if (j == substr.length()) {",
 "        return i - substr.length() + 1;",
-"    } else {",
+"    } 
+	 else {",
 "        return -1;",
 "    }",
 "}",

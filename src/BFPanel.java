@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,37 +57,40 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 		super.paint(g);
 		if (bfAlgorithm != null) {
 			if (pIndicator == null) {
-				pIndicator = new PaintIndicator(0, 30, 0, 90);
+				pIndicator = new PaintIndicator(80, 30, 80, 120);
 			}
-
+			g.setFont(new Font("宋体", Font.BOLD, 30));
+			g.drawString("主串:", 5, 58);
 			for (int i = 0; i < bfAlgorithm.getTextStrLength(); i++) {
-				p = new PaintRect(bfAlgorithm.getTextStr().charAt(i), i * 30, 30);
-				p.drawRwct(g);
+				p = new PaintRect(String.valueOf(bfAlgorithm.getTextStr().charAt(i)), i * 30+80, 30);
+				p.drawRwct(g,i);
 			}
+			g.setFont(new Font("宋体", Font.BOLD, 30));
+			g.drawString("字串:", 5, 150);
 			for (int i = 0; i < bfAlgorithm.getPatternStrLength(); i++) {
-				q = new PaintRect(bfAlgorithm.getPatternStr().charAt(i), star + i * 30, 90);
-				q.drawRwct(g);
+				q = new PaintRect(String.valueOf(bfAlgorithm.getPatternStr().charAt(i)), star + i * 30+80, 120);
+				q.drawRwct(g, i);
 			}
 			pIndicator.drawTextIndicator(g);
 			pIndicator.drawPatternIndicator(g);
 		}
 	}
 
-	public void runStart() {
-		++k;
-		star = bfAlgorithm.getListNow().get(k) * 30;
-		pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
-				bfAlgorithm.getListJ().get(k) * 30 + star, 90);
-		System.out.println("bf1");
-		repaint();
-	}
+//	public void runStart() {
+//		++k;
+//		star = bfAlgorithm.getListNow().get(k) * 30;
+//		pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
+//				bfAlgorithm.getListJ().get(k) * 30 + star, 90);
+//		System.out.println("bf1");
+//		repaint();
+//	}
 
 	@Override
 	public void run() {
 		if (k < bfAlgorithm.getListI().size()) {
 			star = bfAlgorithm.getListNow().get(++k) * 30;
-			pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
-					bfAlgorithm.getListJ().get(k) * 30 + star, 90);
+			pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30+80, 30,
+					bfAlgorithm.getListJ().get(k) * 30+80 + star, 120);
 			repaint();
 		}
 
@@ -100,8 +104,8 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
 					k--;
 					star = bfAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
-							bfAlgorithm.getListJ().get(k) * 30 + star, 90);
+					pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30+80, 30,
+							bfAlgorithm.getListJ().get(k) * 30+80 + star, 120);
 					repaint();
 				}
 
@@ -110,8 +114,8 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
 					k++;
 					star = bfAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
-							bfAlgorithm.getListJ().get(k) * 30 + star, 90);
+					pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30+80, 30,
+							bfAlgorithm.getListJ().get(k) * 30+80 + star, 120);
 					repaint();
 				}
 			}

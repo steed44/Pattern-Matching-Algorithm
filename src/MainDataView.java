@@ -3,6 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import ght.control.com.ConcreteBFObserver;
+import ght.control.com.ConcreteKMPObserver;
 import ght.control.com.ConcreteSubject;
 import ght.control.com.GetData;
 import ght.model.com.BFAlgorithm;
@@ -22,6 +23,7 @@ public class MainDataView extends JPanel {
 	private GetData getData;
 	private ConcreteSubject concreteSubject;
 	private ConcreteBFObserver concreteBFObserver;
+	private ConcreteKMPObserver concreteKMPObserver;
 
 	/**
 	 * Create the panel.
@@ -31,7 +33,9 @@ public class MainDataView extends JPanel {
 		getData = new GetData();
 		concreteSubject = new ConcreteSubject();
 		concreteBFObserver = new ConcreteBFObserver();
+		concreteKMPObserver = new ConcreteKMPObserver();
 		concreteSubject.addObserver(concreteBFObserver);
+		concreteSubject.addObserver(concreteKMPObserver);
 	}
 
 	public void init() {

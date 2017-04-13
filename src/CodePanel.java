@@ -21,144 +21,38 @@ import ght.model.com.KMPAlgorithm;
 
 import java.awt.BorderLayout;
 
-public class CodePanel extends JPanel implements Runnable, ActionListener, ChangeListener {
+public class CodePanel extends JScrollPane implements Runnable, ActionListener {
 
 	/**
 	 * Create the panel.
 	 */
-	private BF bf = new BF();
-	private KMP kmp = new KMP();
-	private BFAlgorithm bfAlgorithm = null;
-	private KMPAlgorithm kmpAlgorithm = null;
-	private int panelNum = 0;
-	private int k = 0;
-	protected Thread thread = new Thread(this);
+
+	protected CodeJSPane panel = new CodeJSPane();
 
 	public CodePanel() {
 		setBorder(new LineBorder(new Color(0, 0, 0), 1));
-		setLayout(new BorderLayout(0, 0));
-		//setPreferredSize(new Dimension(500, 1000));
-		//setSize(500, 1000); // 两句一起写才有效果，不知道为什么
+		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		setViewportView(panel);
+		// panel.setPreferredSize(new Dimension(500, 1000));
+		// panel.setSize(500, 1000); // 两句一起写才有效果，不知道为什么
 		setBackground(Color.WHITE);
-//		JScrollPane jScrollPane = new JScrollPane(this);
-//		jScrollPane.setPreferredSize(new Dimension(300, 500));
-//		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		jScrollPane.setViewportView(this);
-	}
-
-	public void reset() {
-		bfAlgorithm = BFAlgorithm.parseGson();
-		kmpAlgorithm= KMPAlgorithm.parseGson();
-		k = 0;
 
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.setColor(Color.CYAN);
-		if (bfAlgorithm != null) {
-			switch (panelNum) {
-			case 0:
-				if (k < bfAlgorithm.getListI().size()) {
-					g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 500, 20);
-					g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
-					g.setColor(Color.BLACK);
-					for (int i = 0; i < bf.bfStrings.length; i++) {
-						g.drawString(bf.bfStrings[i], 5, 20 + i * 20);
-					}
-				}
-				break;
-			case 1:
-				//if (k < bfAlgorithm.getListI().size()) {
-					//g.fillRect(2, bfAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
-					g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
-					g.setColor(Color.BLACK);
-					for (int i = 0; i < kmp.kmpStr.length; i++) {
-						g.drawString(kmp.kmpStr[i], 5, 20 + i * 20);
-					}
-				//}
-				break;
-			case 2:
-				break;
-			default:
-				break;
-			}
-
-		} else {
-			switch (panelNum) {
-			case 0:
-				g.fillRect(2, 20 - 15, 500, 20);
-				g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
-				g.setColor(Color.BLACK);
-				for (int i = 0; i < bf.bfStrings.length; i++) {
-					g.drawString(bf.bfStrings[i], 5, 20 + i * 20);
-				}
-				break;
-			case 1:
-				g.fillRect(2,0, 1000, 20);
-				g.setFont(new Font("TimesRoman", Font.ITALIC, 18));
-				g.setColor(Color.BLACK);
-				for (int i = 0; i < kmp.kmpStr.length; i++) {
-					g.drawString(kmp.kmpStr[i], 5, 20 + i * 20);
-				}
-				break;
-			case 2:
-				break;
-			default:
-				break;
-			}
-		}
-
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (bfAlgorithm != null) {
-			if (e.getActionCommand().equals("上一步")) {
-				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
-					k--;
-					repaint();
-				}
-			}
-			if (e.getActionCommand().equals("下一步")) {
-				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
-					k++;
-					repaint();
-				}
-			}
-		}
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		k++;
-		repaint();
-	}
 
-	public void setK(int k) {
-		this.k = k;
-	}
-
-	public int getK() {
-		return k;
-	}
-
-	public int getPanelNum() {
-		return panelNum;
-	}
-
-	public void setPanelNum(int panelNum) {
-		this.panelNum = panelNum;
-	}
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
-		panelNum = tabbedPane.getSelectedIndex();
-		repaint();
-		// System.out.println(panelNum);
 	}
 
 }

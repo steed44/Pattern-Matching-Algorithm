@@ -58,8 +58,8 @@ public class test4 implements ActionListener, ChangeListener {
 		frame.setBounds(100, 100, 1200, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("模式匹配辅助教学工具");
-		//设置全屏显示
-		//frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		// 设置全屏显示
+		// frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		// 添加菜单栏
 		menuBarTool = new MenuBarTool();
 		frame.getContentPane().add(menuBarTool, BorderLayout.NORTH);
@@ -87,11 +87,7 @@ public class test4 implements ActionListener, ChangeListener {
 		mainDataView = new MainDataView();
 		splitPane_2.setLeftComponent(mainDataView);
 		// 添加代码显示区
-		
-//		JScrollPane jScrollPane = new JScrollPane(codePanel);
-//		jScrollPane.setPreferredSize(new Dimension(200, 500));
-//		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		jScrollPane.setViewportView(codePanel);
+
 		codePanel = new CodePanel();
 		splitPane.setRightComponent(codePanel);
 		// 添加变量显示区
@@ -99,15 +95,25 @@ public class test4 implements ActionListener, ChangeListener {
 		splitPane_1.setRightComponent(variablePanel);
 
 		// 添加监听事件
-		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel);
-		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel);
+		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
+		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_1.addActionListener(this);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_2.addActionListener(this);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(this);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
-		viewPanel.addChangeListener(codePanel);
+		
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_1.addActionListener(this);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_2.addActionListener(this);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(this);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(this);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
+		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
+		
+		viewPanel.addChangeListener(codePanel.panel);
 		viewPanel.addChangeListener(variablePanel.panel);
 
 		mainDataView.btnNewButton.addActionListener(this);
@@ -150,7 +156,7 @@ public class test4 implements ActionListener, ChangeListener {
 
 		@Override
 		public void run() {
-			switch (codePanel.getPanelNum()) {
+			switch (codePanel.panel.getPanelNum()) {
 			case 0:
 				if (viewPanel.bfPanel.k >= viewPanel.bfPanel.bfAlgorithm.getListI().size()) {
 					timer.cancel();
@@ -168,7 +174,7 @@ public class test4 implements ActionListener, ChangeListener {
 				break;
 			}
 
-			Thread thread2 = new Thread(codePanel);
+			Thread thread2 = new Thread(codePanel.panel);
 			Thread thread3 = new Thread(variablePanel.panel);
 			try {
 				thread1.start();
@@ -196,14 +202,15 @@ public class test4 implements ActionListener, ChangeListener {
 				JOptionPane.showMessageDialog(null, "请输入字符串!");
 			} else {
 				mainDataView.reset();
-				codePanel.reset();
+				codePanel.panel.reset();
 				viewPanel.bfPanel.reset();
+				viewPanel.kmpPanel.reset();
 				variablePanel.panel.reset();
 			}
 
 		} else if (e.getActionCommand().equals("开始")) {
 
-			switch (codePanel.getPanelNum()) {
+			switch (codePanel.panel.getPanelNum()) {
 			case 0:
 				if (viewPanel.bfPanel.isStart == 0) {
 					timer = new Timer();

@@ -74,7 +74,7 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 			pIndicator.drawTextIndicator(g);
 			pIndicator.drawPatternIndicator(g);
 		}
-		
+
 		g.setFont(new Font("宋体", Font.BOLD, 22));
 		g.drawString("next[]:", 5, 225);
 		if (kmpAlgorithm.getListRow().get(k) < 18) {
@@ -103,8 +103,8 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 				if (k > 0 && k < kmpAlgorithm.getListI().size() - 1) {
 					k--;
 					star = kmpAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30+80, 30,
-							kmpAlgorithm.getListJ().get(k) * 30 +star+80, 120);
+					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30 + 80, 30,
+							kmpAlgorithm.getListJ().get(k) * 30 + star + 80, 120);
 					repaint();
 				}
 
@@ -113,8 +113,8 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 				if (k >= 0 && k < kmpAlgorithm.getListI().size() - 2) {
 					k++;
 					star = kmpAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30+80, 30,
-							kmpAlgorithm.getListJ().get(k) * 30 +star+80, 120);
+					pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30 + 80, 30,
+							kmpAlgorithm.getListJ().get(k) * 30 + star + 80, 120);
 					repaint();
 				}
 			}
@@ -124,13 +124,12 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		// if (k < bfAlgorithm.getListI().size()) {
-		// star = bfAlgorithm.getListNow().get(++k) * 30;
-		// pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30,
-		// 30,
-		// bfAlgorithm.getListJ().get(k) * 30 + star, 90);
-		// repaint();
-		// }
+		if (k < kmpAlgorithm.getListI().size()) {
+			star = kmpAlgorithm.getListNow().get(++k) * 30;
+			pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30 + 80, 30,
+					kmpAlgorithm.getListJ().get(k) * 30 + 80 + star, 120);
+			repaint();
+		}
 	}
 
 	public void setK(int k) {

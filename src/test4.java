@@ -103,7 +103,7 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
-		
+
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_1.addActionListener(this);
@@ -112,7 +112,7 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
-		
+
 		viewPanel.addChangeListener(codePanel.panel);
 		viewPanel.addChangeListener(variablePanel.panel);
 
@@ -167,6 +167,12 @@ public class test4 implements ActionListener, ChangeListener {
 
 				break;
 			case 1:
+				if (viewPanel.kmpPanel.k >= viewPanel.kmpPanel.kmpAlgorithm.getListI().size()) {
+					timer.cancel();
+					viewPanel.kmpPanel.isStart = 0;
+				} else {
+					thread1 = new Thread(viewPanel.kmpPanel);
+				}
 				break;
 			case 2:
 				break;
@@ -220,6 +226,11 @@ public class test4 implements ActionListener, ChangeListener {
 
 				break;
 			case 1:
+				if (viewPanel.kmpPanel.isStart == 0) {
+					timer = new Timer();
+					timer.schedule(new MyTask(), 0, 600);
+					viewPanel.kmpPanel.isStart = 1;
+				}
 				break;
 			case 2:
 				break;
@@ -227,9 +238,21 @@ public class test4 implements ActionListener, ChangeListener {
 				break;
 			}
 		} else {
-			if (viewPanel.bfPanel.isStart == 1) {
-				timer.cancel();
-				viewPanel.bfPanel.isStart = 0;
+			switch (codePanel.panel.getPanelNum()) {
+			case 0:
+				if (viewPanel.bfPanel.isStart == 1) {
+					timer.cancel();
+					viewPanel.bfPanel.isStart = 0;
+				}
+				break;
+			case 1:
+				if (viewPanel.kmpPanel.isStart == 1) {
+					timer.cancel();
+					viewPanel.kmpPanel.isStart = 0;
+				}
+				break;
+			default:
+				break;
 			}
 
 		}

@@ -55,6 +55,25 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				}
 				break;
 			case 1:
+				g.setColor(Color.CYAN);
+				if (k != 0) {
+					g.fillRect(charX + 25 * k + 50, 0, 25, 600);
+				}
+				g.setColor(Color.BLACK);
+				for (int m = 0; m < k; m++) {
+					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
+					if (kmpAlgorithm.getListJ().get(m) >= 0) {
+						g.drawString(String.valueOf(kmpAlgorithm.getListI().get(m)), charX + 25 * m + 80, charY);
+						g.drawString(String.valueOf(kmpAlgorithm.getListCharI().get(m)), charX + 25 * m + 80,
+								charY + 22);
+						g.drawString(String.valueOf(kmpAlgorithm.getListJ().get(m)), charX + 25 * m + 80, charY + 44);
+						g.drawString(String.valueOf(kmpAlgorithm.getListCharJ().get(m)), charX + 25 * m + 80,
+								charY + 66);
+						g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)]),
+								charX + 25 * m + 80, charY + 88);
+					}
+
+				}
 				break;
 			case 2:
 				break;

@@ -73,26 +73,26 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 			}
 			pIndicator.drawTextIndicator(g);
 			pIndicator.drawPatternIndicator(g);
-		}
-
-		g.setFont(new Font("宋体", Font.BOLD, 22));
-		g.drawString("next[]:", 5, 225);
-		if (kmpAlgorithm.getListRow().get(k) < 18) {
-			for (int i = 0; i < kmpAlgorithm.getSubstr().length(); i++) {
-				if (i <= kmpAlgorithm.getListJ().get(k)) {
+			g.setFont(new Font("宋体", Font.BOLD, 22));
+			g.drawString("next[]:", 5, 225);
+			if (kmpAlgorithm.getListRow().get(k) < 18) {
+				for (int i = 0; i < kmpAlgorithm.getSubstr().length(); i++) {
+					if (i <= kmpAlgorithm.getListJ().get(k)) {
+						q = new PaintRect((String.valueOf(kmpAlgorithm.getNext()[i])), i * 30 + 80, 200);
+						q.drawRwct(g, i);
+					} else {
+						q = new PaintRect(" ", i * 30 + 80, 200);
+						q.drawRwct(g, i);
+					}
+				}
+			} else {
+				for (int i = 0; i < kmpAlgorithm.getSubstr().length(); i++) {
 					q = new PaintRect((String.valueOf(kmpAlgorithm.getNext()[i])), i * 30 + 80, 200);
-					q.drawRwct(g, i);
-				} else {
-					q = new PaintRect(" ", i * 30 + 80, 200);
 					q.drawRwct(g, i);
 				}
 			}
-		} else {
-			for (int i = 0; i < kmpAlgorithm.getSubstr().length(); i++) {
-				q = new PaintRect((String.valueOf(kmpAlgorithm.getNext()[i])), i * 30 + 80, 200);
-				q.drawRwct(g, i);
-			}
 		}
+
 	}
 
 	@Override

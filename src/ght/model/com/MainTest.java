@@ -8,9 +8,10 @@ public class MainTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String aString = "abacdefgcccbbcccababaaaa";
+		String aString = "abacdefgcccbbcccababaaaaasss";
 		String bString = "aaaaab";
 		Gson gson = new Gson();
+		int num;
 
 		if (aString.charAt(1) == 'a') {
 			System.out.println("yes");
@@ -25,11 +26,20 @@ public class MainTest {
 
 		// KMP算法测试
 		KMPAlgorithm kmpAlgorithm = new KMPAlgorithm(aString, bString);
-		int num = kmpAlgorithm.mainAlgorithm();
+		num = kmpAlgorithm.mainAlgorithm();
 		System.out.println(num);
-		for (int i = 0; i < 6; i++)
-			System.out.println(kmpAlgorithm.next[i]);
+		if(num == -1)
+		{
+			System.out.println("匹配失败");
+		}
+//		for (int i = 0; i < 6; i++)
+//			System.out.println(kmpAlgorithm.next[i]);
 
+		//BM算法测试
+		BMAlgorithm bmAlgorithm = new BMAlgorithm(aString, bString);
+		num = bmAlgorithm.boyerMoore();
+		System.out.println(num);
 	}
+	
 
 }

@@ -112,6 +112,15 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
+		
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton_1.addActionListener(this);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton_2.addActionListener(this);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton_3.addActionListener(this);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton.addActionListener(this);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
+		viewPanel.bmPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
 
 		viewPanel.addChangeListener(codePanel.panel);
 		viewPanel.addChangeListener(variablePanel.panel);
@@ -211,6 +220,7 @@ public class test4 implements ActionListener, ChangeListener {
 				codePanel.panel.reset();
 				viewPanel.bfPanel.reset();
 				viewPanel.kmpPanel.reset();
+				viewPanel.bmPanel.reset();
 				variablePanel.panel.reset();
 			}
 

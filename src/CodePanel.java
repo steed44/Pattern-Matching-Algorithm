@@ -12,7 +12,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.paint.gjt.PaintIndicator;
+import com.paint.ght.PaintIndicator;
 
 import ght.model.com.BF;
 import ght.model.com.BFAlgorithm;

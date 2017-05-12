@@ -115,7 +115,7 @@ public class BMAlgorithm {
 		}
 	}
 
-	public void boyerMoore() {
+	public int boyerMoore() {
 		preBmBc();
 		preBmGs();
 		int j = 0;
@@ -127,12 +127,14 @@ public class BMAlgorithm {
 			}
 			if (i < 0) {
 				System.out.println("one position is:" + j);
-				j += bmGs[0];
+				return j+1;
+//				j += bmGs[0];
 			} else {
 				j += Math.max(bmGs[i], getBmBc(String.valueOf(textStr.charAt(i + j)), pLength) - pLength + 1 + i);
 			}
 		}
 		System.out.println("count:" + count);
+		return -1;
 	}
 
 	// 生成json文件

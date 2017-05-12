@@ -72,7 +72,6 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 						g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)]),
 								charX + 25 * m + 80, charY + 88);
 					}
-
 				}
 				break;
 			case 2:
@@ -80,7 +79,6 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 			default:
 				break;
 			}
-
 		}
 		switch (panelNum) {
 		case 0:
@@ -90,7 +88,6 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 			g.drawString("j", charX + 40, charY + 44);
 			g.drawString("charAt(j)", charX, charY + 66);
 			// 添加设置jspanel大小的代码
-
 			break;
 		case 1:
 			g.setFont(new Font("TimesRoman", Font.ITALIC, 20));

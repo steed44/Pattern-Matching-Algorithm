@@ -1,4 +1,4 @@
-package com.paint.gjt;
+package com.paint.ght;
 
 import java.awt.Font;
 import java.awt.Graphics;

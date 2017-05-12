@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import com.google.gson.Gson;
-import com.paint.gjt.PaintIndicator;
-import com.paint.gjt.PaintRect;
+import com.paint.ght.PaintIndicator;
+import com.paint.ght.PaintRect;
 
 import ght.model.com.BFAlgorithm;
 
@@ -76,14 +76,6 @@ public class BFPanel extends JPanel implements Runnable, ActionListener {
 		}
 	}
 
-//	public void runStart() {
-//		++k;
-//		star = bfAlgorithm.getListNow().get(k) * 30;
-//		pIndicator = new PaintIndicator(bfAlgorithm.getListI().get(k) * 30, 30,
-//				bfAlgorithm.getListJ().get(k) * 30 + star, 90);
-//		System.out.println("bf1");
-//		repaint();
-//	}
 
 	@Override
 	public void run() {

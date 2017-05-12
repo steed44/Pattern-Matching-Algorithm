@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import com.paint.gjt.PaintIndicator;
-import com.paint.gjt.PaintRect;
+import com.paint.ght.PaintIndicator;
+import com.paint.ght.PaintRect;
 
 import ght.model.com.BFAlgorithm;
 import ght.model.com.KMPAlgorithm;

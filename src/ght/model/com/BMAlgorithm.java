@@ -20,9 +20,11 @@ public class BMAlgorithm {
 	private int[] bmGs;
 	private int[] suffix;
 	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
+	private ArrayList<Integer> listM, listN, listL;
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 	private int now = 0;
-	private int i = 0, j = 0;
+	private int i = 0, j = 0;  //i变量用于指向子串，j用于指向主串
+	private int m = 0,n = 0,l = 0;  //m用于指向坏字符数字，n用于指向suffix数组，l用于指向好字符数组
 
 	public BMAlgorithm(String textStr, String patternStr) {
 		this.textStr = textStr;
@@ -35,6 +37,9 @@ public class BMAlgorithm {
 		listI = new ArrayList<Integer>();
 		listJ = new ArrayList<Integer>();
 		listRow = new ArrayList<Integer>();
+		listM = new ArrayList<Integer>();
+		listN = new ArrayList<Integer>();
+		listL = new ArrayList<Integer>();
 		listNow = new ArrayList<Integer>();
 		listCharI = new ArrayList<Character>();
 		listCharJ = new ArrayList<Character>();
@@ -42,7 +47,7 @@ public class BMAlgorithm {
 	}
 
 	// 记录算法产生的数据
-	public void writeList(int row) {
+	public void writeList(int i , int j, int m , int n, int l, int row) {
 		listI.add(i);
 		listJ.add(j);
 		if (i == tLength && i != 0) {
@@ -59,10 +64,13 @@ public class BMAlgorithm {
 
 		listNow.add(now);
 		listRow.add(row);
+		listM.add(m);
+		listN.add(n);
+		listL.add(l);
 	}
 
 	private void preBmBc() {
-		for (int i = pLength - 2; i >= 0; i--) {
+		for (i = pLength - 2; i >= 0; i--) {
 			if (!bmBc.containsKey(String.valueOf(patternStr.charAt(i)))) {
 				bmBc.put(String.valueOf(patternStr.charAt(i)), (Integer) (pLength - i - 1));
 			}
@@ -70,39 +78,39 @@ public class BMAlgorithm {
 	}
 
 	private void suffix() {
-		suffix[pLength - 1] = pLength;
-		int q = 0;
-		for (int i = pLength - 2; i >= 0; i--) {
-			q = i;
-			while (q >= 0 && patternStr.charAt(q) == patternStr.charAt(pLength - 1 - i + q)) {
-				q--;
+		n = pLength - 1;
+		suffix[n] = pLength;
+		n = 0;
+		for (i = pLength - 2; i >= 0; i--) {
+			n = i;
+			while (n >= 0 && patternStr.charAt(n) == patternStr.charAt(pLength - 1 - i + n)) {
+				n--;
 			}
-			suffix[i] = i - q;
+			suffix[i] = i - n;
 		}
 	}
 
 	private void preBmGs() {
-		int i, j;
-
 		suffix();
 		// 模式串中没有子串匹配上好后缀，也找不到一个最大前缀
-		for (i = 0; i < pLength; i++) {
-			bmGs[i] = pLength;
+		for (l = 0; l < pLength; l++) {
+			bmGs[l] = pLength;
 		}
 		// 模式串中没有子串匹配上好后缀，但找到一个最大前缀
-		j = 0;
-		for (i = pLength - 1; i >= 0; i--) {
-			if (suffix[i] == i + 1) {
-				for (; j < pLength - 1 - i; j++) {
-					if (bmGs[j] == pLength) {
-						bmGs[j] = pLength - 1 - i;
+		l = 0;
+		for (n = pLength - 1; n >= 0; n--) {
+			if (suffix[n] == n + 1) {
+				for (; l < pLength - 1 - n; l++) {
+					if (bmGs[l] == pLength) {
+						bmGs[l] = pLength - 1 - n;
 					}
 				}
 			}
 		}
 		// 模式串中有子串匹配上好后缀
-		for (i = 0; i < pLength - 1; i++) {
-			bmGs[pLength - 1 - suffix[i]] = pLength - 1 - i;
+		for (n = 0; n < pLength - 1; n++) {
+			l = pLength - 1 - suffix[n];
+			bmGs[l] = pLength - 1 - n;
 		}
 	}
 
@@ -118,22 +126,22 @@ public class BMAlgorithm {
 	public int boyerMoore() {
 		preBmBc();
 		preBmGs();
-		int j = 0;
-		int i = 0;
-		int count = 0;
+		j = 0;
+		i = 0;
+//		int count = 0;
 		while (j <= tLength - pLength) {
 			for (i = pLength - 1; i >= 0 && patternStr.charAt(i) == textStr.charAt(i + j); i--) { // 用于计数
-				count++;
+//				count++;
 			}
 			if (i < 0) {
-				System.out.println("one position is:" + j);
+//				System.out.println("one position is:" + j);
 				return j+1;
 //				j += bmGs[0];
 			} else {
 				j += Math.max(bmGs[i], getBmBc(String.valueOf(textStr.charAt(i + j)), pLength) - pLength + 1 + i);
 			}
 		}
-		System.out.println("count:" + count);
+//		System.out.println("count:" + count);
 		return -1;
 	}
 

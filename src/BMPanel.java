@@ -72,6 +72,15 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 			}
 			pIndicator.drawTextIndicator(g);
 			pIndicator.drawPatternIndicator(g);
+			//画bmBc数组（坏字符）
+			g.setFont(new Font("宋体", Font.BOLD, 22));
+			g.drawString("bmBc[]:", 5, 225);
+			//画suffix数组
+			g.setFont(new Font("宋体", Font.BOLD, 22));
+			g.drawString("suffix[]:", 5, 300);
+			//画bmGs数组（好字符）
+			g.setFont(new Font("宋体", Font.BOLD, 22));
+			g.drawString("bmGs[]:", 5, 375);
 		}
 	}
 

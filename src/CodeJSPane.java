@@ -14,6 +14,8 @@ import javax.swing.event.ChangeListener;
 
 import ght.model.com.BF;
 import ght.model.com.BFAlgorithm;
+import ght.model.com.BM;
+import ght.model.com.BMAlgorithm;
 import ght.model.com.KMP;
 import ght.model.com.KMPAlgorithm;
 
@@ -24,8 +26,10 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 	 */
 	private BF bf = new BF();
 	private KMP kmp = new KMP();
+	private BM bm = new BM();
 	private BFAlgorithm bfAlgorithm = null;
 	private KMPAlgorithm kmpAlgorithm = null;
+	private BMAlgorithm bmAlgorithm = null;
 	private int panelNum = 0;
 	private int k = 0;
 	protected Thread thread = new Thread(this);
@@ -39,6 +43,7 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 	public void reset() {
 		bfAlgorithm = BFAlgorithm.parseGson();
 		kmpAlgorithm = KMPAlgorithm.parseGson();
+		bmAlgorithm = BMAlgorithm.parseGson();
 		k = 0;
 	}
 
@@ -67,6 +72,13 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				}
 				break;
 			case 2:
+				if (k < bmAlgorithm.getListI().size()) {
+					g.fillRect(2, bmAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
+					g.setColor(Color.BLACK);
+					for (int i = 0; i < bm.bmStrings.length; i++) {
+						g.drawString(bm.bmStrings[i], 5, 20 + i * 20);
+					}
+				}
 				break;
 			default:
 				break;
@@ -89,6 +101,11 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				}
 				break;
 			case 2:
+				g.fillRect(2, 5, 500, 20);
+				g.setColor(Color.BLACK);
+				for (int i = 0; i < bm.bmStrings.length; i++) {
+					g.drawString(bm.bmStrings[i], 5, 20 + i * 20);
+				}
 				break;
 			default:
 				break;

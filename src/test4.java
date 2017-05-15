@@ -192,12 +192,12 @@ public class test4 implements ActionListener, ChangeListener {
 			Thread thread2 = new Thread(codePanel.panel);
 			Thread thread3 = new Thread(variablePanel.panel);
 			try {
-				thread1.start();
-				thread1.join();
-				thread2.start();
-				thread2.join();
-				thread3.start();
-				thread3.join();
+				thread1.start();  //启动主显示界面的线程
+				thread1.join();	  //主显示界面线程结束后才进行下一步
+				thread2.start();  //启动代码同步展示界面的
+				thread2.join();   //代码同步显示界面的线程结束后再进行下一步
+				thread3.start();  //启动变量同步展示界面的线程
+				thread3.join();  //变量同步显示界面的线程结束后才进行下一步操作
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}

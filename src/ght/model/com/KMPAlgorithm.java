@@ -43,10 +43,11 @@ public class KMPAlgorithm {
 	public int mainAlgorithm() {
 		writeList(-2, -2, ' ', ' ', 19);
 		writeList(i, j, ' ', ' ', 20);
-		int i = 0, j = 0;
+		int i = 0, j = 0, n = 0;
 		writeList(i, j, ' ', ' ', 21);
 		while (i < str.length() && j < substr.length()) {
 			writeList(i, j, str.charAt(i), substr.charAt(j), 22);
+			n++;
 			if (str.charAt(i) == substr.charAt(j)) {
 				++i;
 				writeList(i, j, ' ', ' ', 23);
@@ -80,18 +81,21 @@ public class KMPAlgorithm {
 				writeList(i, j, ' ', ' ', 21);
 			}
 		}
+		System.out.println("KMP算法比较次数" + n);
 		writeList(i, j, ' ', ' ', 33);
 		writeList(i, j, ' ', ' ', 34);
 		if (j == substr.length()) {
 			writeList(i, j, ' ', ' ', 35);
 			writeList(i, j, ' ', ' ', 36);
 			writeList(i, j, ' ', ' ', 40);
+			System.out.println("匹配成功");
 			return i - substr.length() + 1;
 		} else {
 			writeList(i, j, ' ', ' ', 37);
 			writeList(i, j, ' ', ' ', 38);
 			writeList(i, j, ' ', ' ', 39);
 			writeList(i, j, ' ', ' ', 40);
+			System.out.println("匹配失败");
 			return -1;
 		}
 	}

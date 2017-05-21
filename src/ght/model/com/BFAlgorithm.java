@@ -56,6 +56,7 @@ public class BFAlgorithm {
 		now = 0;
 		i = 0;
 		j = 0;
+		int count = 0;
 		for (int k = 1; k <= 4; k++) {
 			writeList(k);
 		}
@@ -77,9 +78,11 @@ public class BFAlgorithm {
 				writeList(12);
 				writeList(4);
 			}
+			count++;
 		}
 		writeList(13);
 		writeList(14);
+		System.out.println("BF算法比较次数："+count);
 		if (j == patternStrLength) {
 			writeList(15);
 			writeList(20);

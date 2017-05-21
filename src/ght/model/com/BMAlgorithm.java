@@ -50,16 +50,21 @@ public class BMAlgorithm {
 	public void writeList(int i , int j, int m , int n, int l, int row) {
 		listI.add(i);
 		listJ.add(j);
-		if (i == tLength && i != 0) {
-			listCharI.add(textStr.charAt(i - 1));
-		} else {
-			listCharI.add(textStr.charAt(i));
+		if (j == tLength && j != 0) {
+			listCharJ.add(textStr.charAt(j - 1));
+		} else if(j>=0){
+			listCharJ.add(textStr.charAt(j));
+		}
+		else {
+			listCharJ.add(' ');
 		}
 
-		if (j == pLength && j != 0) {
-			listCharJ.add(patternStr.charAt(j - 1));
-		} else {
-			listCharJ.add(patternStr.charAt(j));
+		if (i == pLength && i != 0) {
+			listCharI.add(patternStr.charAt(i - 1));
+		} else if (i>=0){
+			listCharI.add(patternStr.charAt(i));
+		}else {
+			listCharJ.add(' ');
 		}
 
 		listNow.add(now);
@@ -70,78 +75,152 @@ public class BMAlgorithm {
 	}
 
 	private void preBmBc() {
+		writeList(i, j, m, n, l, 20);
 		for (i = pLength - 2; i >= 0; i--) {
+			writeList(i, j, m, n, l, 21);
 			if (!bmBc.containsKey(String.valueOf(patternStr.charAt(i)))) {
 				bmBc.put(String.valueOf(patternStr.charAt(i)), (Integer) (pLength - i - 1));
+				writeList(i, j, m, n, l, 22);
 			}
+			writeList(i, j, m, n, l, 23);
+			writeList(i, j, m, n, l, 20);
 		}
+		writeList(i, j, m, n, l, 24);
+		writeList(i, j, m, n, l, 3);
 	}
 
 	private void suffix() {
+		writeList(i, j, m, n, l, 26);
 		n = pLength - 1;
 		suffix[n] = pLength;
+		writeList(i, j, m, n, l, 27);
 		n = 0;
+		writeList(i, j, m, n, l, 28);
+		writeList(i, j, m, n, l, 29);
 		for (i = pLength - 2; i >= 0; i--) {
 			n = i;
+			writeList(i, j, m, n, l, 30);
+			writeList(i, j, m, n, l, 31);
 			while (n >= 0 && patternStr.charAt(n) == patternStr.charAt(pLength - 1 - i + n)) {
 				n--;
+				writeList(i, j, m, n, l, 32);
+				writeList(i, j, m, n, l, 31);
 			}
+			writeList(i, j, m, n, l, 33);
 			suffix[i] = i - n;
+			writeList(i, j, m, n, l, 34);
+			writeList(i, j, m, n, l, 29);
 		}
+		writeList(i, j, m, n, l, 35);
+		writeList(i, j, m, n, l, 39);
 	}
 
 	private void preBmGs() {
+		writeList(i, j, m, n, l, 38);
+		writeList(i, j, m, n, l, 39);
 		suffix();
+		writeList(i, j, m, n, l, 40);
 		// 模式串中没有子串匹配上好后缀，也找不到一个最大前缀
 		for (l = 0; l < pLength; l++) {
 			bmGs[l] = pLength;
+			writeList(i, j, m, n, l, 41);
+			writeList(i, j, m, n, l, 40);
 		}
+		writeList(i, j, m, n, l, 42);
 		// 模式串中没有子串匹配上好后缀，但找到一个最大前缀
 		l = 0;
+		writeList(i, j, m, n, l, 43);
+		writeList(i, j, m, n, l, 44);
 		for (n = pLength - 1; n >= 0; n--) {
+			writeList(i, j, m, n, l, 45);
 			if (suffix[n] == n + 1) {
+				writeList(i, j, m, n, l, 46);
 				for (; l < pLength - 1 - n; l++) {
+					writeList(i, j, m, n, l, 47);
 					if (bmGs[l] == pLength) {
 						bmGs[l] = pLength - 1 - n;
+						writeList(i, j, m, n, l, 48);
+						writeList(i, j, m, n, l, 49);
 					}
+					writeList(i, j, m, n, l, 46);
 				}
+				writeList(i, j, m, n, l, 50);
+				writeList(i, j, m, n, l, 51);
 			}
+			writeList(i, j, m, n, l, 44);
 		}
+		writeList(i, j, m, n, l, 52);
 		// 模式串中有子串匹配上好后缀
+		writeList(i, j, m, n, l, 53);
 		for (n = 0; n < pLength - 1; n++) {
 			l = pLength - 1 - suffix[n];
 			bmGs[l] = pLength - 1 - n;
+			writeList(i, j, m, n, l, 54);
+			writeList(i, j, m, n, l, 55);
+			writeList(i, j, m, n, l, 53);
 		}
+		writeList(i, j, m, n, l, 56);
+		writeList(i, j, m, n, l, 3);
 	}
 
 	private int getBmBc(String c, int m) {
 		// 如果在规则中则返回相应的值，否则返回pattern的长度
+		writeList(i, j, m, n, l, 58);
 		if (bmBc.containsKey(c)) {
+			writeList(i, j, m, n, l, 59);
+			writeList(i, j, m, n, l, 15);
 			return bmBc.get(c);
 		} else {
+			writeList(i, j, m, n, l, 60);
+			writeList(i, j, m, n, l, 61);
+			writeList(i, j, m, n, l, 15);
 			return m;
 		}
 	}
 
 	public int boyerMoore() {
+		System.out.println("主串长度："+tLength +","+"子串长度:"+pLength);
+		writeList(i, j, m, n, l, 1);
+		writeList(i, j, m, n, l, 2);
+		writeList(i, j, m, n, l, 19);
 		preBmBc();
+		writeList(i, j, m, n, l, 37);
 		preBmGs();
 		j = 0;
+		writeList(i, j, m, n, l, 4);
 		i = 0;
-//		int count = 0;
+		writeList(i, j, m, n, l, 5);
+		int count = 0;
+		writeList(i, j, m, n, l, 6);
+		writeList(i, j, m, n, l, 7);
 		while (j <= tLength - pLength) {
+			writeList(i, j, m, n, l, 8);
 			for (i = pLength - 1; i >= 0 && patternStr.charAt(i) == textStr.charAt(i + j); i--) { // 用于计数
-//				count++;
+				count++;
+				writeList(i, j, m, n, l, 9);
+				writeList(i, j, m, n, l, 8);
 			}
+			writeList(i, j, m, n, l, 10);
+			writeList(i, j, m, n, l, 11);
 			if (i < 0) {
+				writeList(i, j, m, n, l, 12);
+				writeList(i, j, m, n, l, 1);
 //				System.out.println("one position is:" + j);
+				System.out.println("BM算法比较次数:" + count);
 				return j+1;
 //				j += bmGs[0];
 			} else {
+				writeList(i, j, m, n, l, 13);
+				count++;
+				writeList(i, j, m, n, l, 14);
+				writeList(i, j, m, n, l, 57);
 				j += Math.max(bmGs[i], getBmBc(String.valueOf(textStr.charAt(i + j)), pLength) - pLength + 1 + i);
 			}
+			writeList(i, j, m, n, l, 7);
 		}
-//		System.out.println("count:" + count);
+		writeList(i, j, m, n, l, 17);
+		writeList(i, j, m, n, l, 1);
+		System.out.println("BM算法比较次数:" + count);
 		return -1;
 	}
 

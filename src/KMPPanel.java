@@ -33,7 +33,7 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 	public KMPPanel() {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
-
+		setBackground(Color.WHITE);
 		controlBtnPanel = new ControlBtnPanel();
 		add(controlBtnPanel, BorderLayout.SOUTH);
 

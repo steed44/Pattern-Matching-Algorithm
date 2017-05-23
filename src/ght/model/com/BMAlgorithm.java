@@ -22,13 +22,13 @@ public class BMAlgorithm {
 	protected ArrayList<Integer> mapInt;
 	private int[] bmGs;
 	private int[] suffix;
-	protected ArrayList<Integer>bmGss;
+	protected ArrayList<Integer>bmGss, bmGsToListL;
 	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
 	private ArrayList<Integer> listM, listN, listL;
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 	private int now = 0;
 	private int i = 0, j = 0;  //i变量用于指向子串，j用于指向主串
-	private int m = -1,n = -1,l = 0;  //m用于指向坏字符数字，n用于指向suffix数组，l用于指向好字符数组
+	private int m = -1,n = -1,l = -1;  //m用于指向坏字符数字，n用于指向suffix数组，l用于指向好字符数组
 
 	public BMAlgorithm(String textStr, String patternStr) {
 		this.textStr = textStr;
@@ -53,6 +53,7 @@ public class BMAlgorithm {
 		mapInt = new ArrayList<Integer>();
 		mapStr = new ArrayList<String>();
 		bmGss = new ArrayList<Integer>();
+		bmGsToListL = new ArrayList<Integer>();
 		now = 0;
 	}
 
@@ -74,7 +75,12 @@ public class BMAlgorithm {
 		} else if (i>=0){
 			listCharI.add(patternStr.charAt(i));
 		}else {
-			listCharJ.add(' ');
+			listCharI.add(' ');
+		}
+		if(l == -1 || l == pLength){
+			bmGsToListL.add(-1);
+		}else{
+			bmGsToListL.add(bmGs[l]);
 		}
 
 		listNow.add(now);
@@ -187,15 +193,15 @@ public class BMAlgorithm {
 
 	private int getBmBc(String c, int m) {
 		// 如果在规则中则返回相应的值，否则返回pattern的长度
-		writeList(i, j, m, n, l, 58);
+		writeList(i, i + j, m, n, l, 58);
 		if (bmBc.containsKey(c)) {
-			writeList(i, j, m, n, l, 59);
-			writeList(i, j, m, n, l, 15);
+			writeList(i, i + j, m, n, l, 59);
+			writeList(i, i + j, m, n, l, 15);
 			return bmBc.get(c);
 		} else {
-			writeList(i, j, m, n, l, 60);
-			writeList(i, j, m, n, l, 61);
-			writeList(i, j, m, n, l, 15);
+			writeList(i, i + j, m, n, l, 60);
+			writeList(i, i + j, m, n, l, 61);
+			writeList(i, i + j, m, n, l, 15);
 			return m;
 		}
 	}
@@ -216,33 +222,33 @@ public class BMAlgorithm {
 		writeList(i, j, m, n, l, 6);
 		writeList(i, j, m, n, l, 7);
 		while (j <= tLength - pLength) {
-			writeList(i, j, m, n, l, 8);
+			writeList(i, i + j, m, n, l, 8);
 			for (i = pLength - 1; i >= 0 && patternStr.charAt(i) == textStr.charAt(i + j); i--) { // 用于计数
 				count++;
-				writeList(i, j, m, n, l, 9);
-				writeList(i, j, m, n, l, 8);
+				writeList(i, i + j, m, n, l, 9);
+				writeList(i, i + j, m, n, l, 8);
 			}
-			writeList(i, j, m, n, l, 10);
-			writeList(i, j, m, n, l, 11);
+			writeList(i, i + j, m, n, l, 10);
+			writeList(i, i + j, m, n, l, 11);
 			if (i < 0) {
-				writeList(i, j, m, n, l, 12);
-				writeList(i, j, m, n, l, 1);
+				writeList(i, i + j, m, n, l, 12);
+				writeList(i, i + j, m, n, l, 1);
 //				System.out.println("one position is:" + j);
 				System.out.println("BM算法比较次数:" + count);
 				return j+1;
 //				j += bmGs[0];
 			} else {
-				writeList(i, j, m, n, l, 13);
+				writeList(i, i + j, m, n, l, 13);
 				count++;
-				writeList(i, j, m, n, l, 14);
-				writeList(i, j, m, n, l, 57);
+				writeList(i, i + j, m, n, l, 14);
+				writeList(i, i + j, m, n, l, 57);
 				j += Math.max(bmGs[i], getBmBc(String.valueOf(textStr.charAt(i + j)), pLength) - pLength + 1 + i);
 				now = j;
 			}
-			writeList(i, j, m, n, l, 7);
+			writeList(i, i + j, m, n, l, 7);
 		}
-		writeList(i, j, m, n, l, 17);
-		writeList(i, j, m, n, l, 1);
+		writeList(i, i + j, m, n, l, 17);
+		writeList(i, i + j, m, n, l, 1);
 		System.out.println("BM算法比较次数:" + count);
 		return -1;
 	}
@@ -373,6 +379,10 @@ public class BMAlgorithm {
 
 	public ArrayList<Integer> getBmGss() {
 		return bmGss;
+	}
+
+	public ArrayList<Integer> getBmGsToListL() {
+		return bmGsToListL;
 	}
 	
 

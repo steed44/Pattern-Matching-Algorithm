@@ -19,7 +19,7 @@ public class VariablePanel extends JScrollPane implements Runnable {
 		setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		setViewportView(panel);
-		t.start();
+		//t.start();
 
 	}
 

@@ -32,7 +32,7 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
-
+		setBackground(Color.WHITE);
 		controlBtnPanel = new ControlBtnPanel();
 		add(controlBtnPanel, BorderLayout.SOUTH);
 
@@ -159,6 +159,9 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 					star = bmAlgorithm.getListNow().get(k) * 30;
 					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
 							bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
+					if(bmAlgorithm.getListRow().get(k) == 41 || bmAlgorithm.getListRow().get(k) == 48 ||bmAlgorithm.getListRow().get(k) == 54){
+						BmGsNow-=2;
+					}
 					repaint();
 				}
 

@@ -13,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ght.model.com.BFAlgorithm;
+import ght.model.com.BMAlgorithm;
 import ght.model.com.KMPAlgorithm;
 
 public class VarPanel extends JPanel implements Runnable, ActionListener, ChangeListener {
@@ -22,6 +23,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 	 */
 	private BFAlgorithm bfAlgorithm = null;
 	private KMPAlgorithm kmpAlgorithm = null;
+	private BMAlgorithm bmAlgorithm = null;
 	int charY = 20, charX = 5;
 	int panelNum = 0;
 	int k = 0;
@@ -75,6 +77,43 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				}
 				break;
 			case 2:
+				int m = 0;
+				int a = 0;
+				g.setColor(Color.CYAN);
+				if (k != 0) {
+					if (k > 20){
+						m = k%20 +(k/20-1)*20;
+						g.fillRect(charX + 25 * 20 + 50, 0, 25, 600);
+					}else {
+						m = 0;
+						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
+					}
+//					m = k/20;
+				}
+				g.setColor(Color.BLACK);
+				for (; m < k; m++,a++) {
+					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
+					//int a = 0;
+					//变量同步显示有问题
+					if (bmAlgorithm.getListI().get(m) >= 0) {
+						g.drawString(String.valueOf(bmAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
+						g.drawString(String.valueOf(bmAlgorithm.getListCharI().get(m)), charX + 25 * a + 80,
+								charY + 22);
+					}
+					if (bmAlgorithm.getListJ().get(m) >= 0) {
+						g.drawString(String.valueOf(bmAlgorithm.getListJ().get(m)), charX + 25 * a + 80, charY + 44);
+						g.drawString(String.valueOf(bmAlgorithm.getListCharJ().get(m)), charX + 25 * a + 80,
+								charY + 66);
+					}
+					if(bmAlgorithm.getListN().get(m) >= 0){
+						g.drawString(String.valueOf(bmAlgorithm.getSuffix()[bmAlgorithm.getListN().get(m)]),
+								charX + 25 * a + 80, charY + 88);
+					}
+					if(bmAlgorithm.getBmGsToListL().get(m) >= 0){
+						g.drawString(String.valueOf(bmAlgorithm.getBmGsToListL().get(m)),
+								charX + 25 * a + 80, charY + 110);
+					}
+				}
 				break;
 			default:
 				break;
@@ -100,6 +139,14 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 
 			break;
 		case 2:
+			g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
+			g.drawString("i", charX + 40, charY);
+			g.drawString("charAt(i)", charX, charY + 22);
+			g.drawString("j", charX + 40, charY + 44);
+			g.drawString("charAt(j)", charX, charY + 66);
+			g.drawString("suffix[n]", charX, charY + 88);
+			g.drawString("bmGs[l]", charX, charY + 110);
+			
 			break;
 		default:
 			break;
@@ -110,6 +157,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 	public void reset() {
 		bfAlgorithm = BFAlgorithm.parseGson();
 		kmpAlgorithm = KMPAlgorithm.parseGson();
+		bmAlgorithm = BMAlgorithm.parseGson();
 		k = 0;
 	}
 

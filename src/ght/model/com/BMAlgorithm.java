@@ -215,6 +215,7 @@ public class BMAlgorithm {
 				writeList(i, j, m, n, l, 14);
 				writeList(i, j, m, n, l, 57);
 				j += Math.max(bmGs[i], getBmBc(String.valueOf(textStr.charAt(i + j)), pLength) - pLength + 1 + i);
+				now = j;
 			}
 			writeList(i, j, m, n, l, 7);
 		}

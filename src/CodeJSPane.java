@@ -135,19 +135,29 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				if (e.getActionCommand().equals("上一步")) {
 					if (k > 0 && k < kmpAlgorithm.getListI().size() - 1) {
 						k--;
-						System.out.println(k);
 						repaint();
 					}
 				}
 				if (e.getActionCommand().equals("下一步")) {
 					if (k >= 0 && k < kmpAlgorithm.getListI().size() - 2) {
 						k++;
-						System.out.println(k);
 						repaint();
 					}
 				}
 				break;
 			case 2:
+				if (e.getActionCommand().equals("上一步")) {
+					if (k > 0 && k < bmAlgorithm.getListJ().size() - 1) {
+						k--;
+						repaint();
+					}
+				}
+				if (e.getActionCommand().equals("下一步")) {
+					if (k >= 0 && k < bmAlgorithm.getListJ().size() - 2) {
+						k++;
+						repaint();
+					}
+				}
 				break;
 			default:
 				break;

@@ -184,6 +184,12 @@ public class test4 implements ActionListener, ChangeListener {
 				}
 				break;
 			case 2:
+				if (viewPanel.bmPanel.k >= viewPanel.bmPanel.bmAlgorithm.getListI().size()) {
+					timer.cancel();
+					viewPanel.bmPanel.isStart = 0;
+				} else {
+					thread1 = new Thread(viewPanel.bmPanel);
+				}
 				break;
 			default:
 				break;
@@ -211,6 +217,8 @@ public class test4 implements ActionListener, ChangeListener {
 			if (viewPanel.bfPanel.isStart == 1) {
 				timer.cancel();
 				viewPanel.bfPanel.isStart = 0;
+				viewPanel.kmpPanel.isStart = 0;
+				viewPanel.bmPanel.isStart = 0;
 			}
 			// 这里要添加一个异常检错,不然在数据框没有内容的时候点击更新会出错
 			if (mainDataView.textField.getText().equals("") || mainDataView.textField_1.getText().equals("")) {
@@ -243,6 +251,11 @@ public class test4 implements ActionListener, ChangeListener {
 				}
 				break;
 			case 2:
+				if (viewPanel.bmPanel.isStart == 0) {
+					timer = new Timer();
+					timer.schedule(new MyTask(), 0, 600);
+					viewPanel.bmPanel.isStart = 1;
+				}
 				break;
 			default:
 				break;
@@ -261,6 +274,12 @@ public class test4 implements ActionListener, ChangeListener {
 					viewPanel.kmpPanel.isStart = 0;
 				}
 				break;
+			case 2:
+				if (viewPanel.bmPanel.isStart == 1) {
+					timer.cancel();
+					viewPanel.bmPanel.isStart = 0;
+				}
+				break;
 			default:
 				break;
 			}
@@ -274,6 +293,8 @@ public class test4 implements ActionListener, ChangeListener {
 		// TODO Auto-generated method stub
 		timer.cancel();
 		viewPanel.bfPanel.isStart = 0;
+		viewPanel.kmpPanel.isStart = 0;
+		viewPanel.bmPanel.isStart = 0;
 	}
 
 }

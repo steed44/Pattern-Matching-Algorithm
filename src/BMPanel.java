@@ -89,8 +89,8 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 	public void run() {
 		if (k < bmAlgorithm.getListI().size()) {
 			star = bmAlgorithm.getListNow().get(++k) * 30;
-			pIndicator = new PaintIndicator(bmAlgorithm.getListI().get(k) * 30+80, 30,
-					bmAlgorithm.getListJ().get(k) * 30+80 + star, 120);
+			pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
+					bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
 			repaint();
 		}
 
@@ -101,21 +101,21 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 
 		if (bmAlgorithm != null) {
 			if (e.getActionCommand().equals("上一步")) {
-				if (k > 0 && k < bmAlgorithm.getListI().size() - 1) {
+				if (k > 0 && k < bmAlgorithm.getListJ().size() - 1) {
 					k--;
 					star = bmAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(bmAlgorithm.getListI().get(k) * 30+80, 30,
-							bmAlgorithm.getListJ().get(k) * 30+80 + star, 120);
+					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
+							bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
 					repaint();
 				}
 
 			}
 			if (e.getActionCommand().equals("下一步")) {
-				if (k >= 0 && k < bmAlgorithm.getListI().size() - 2) {
+				if (k >= 0 && k < bmAlgorithm.getListJ().size() - 2) {
 					k++;
 					star = bmAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(bmAlgorithm.getListI().get(k) * 30+80, 30,
-							bmAlgorithm.getListJ().get(k) * 30+80 + star, 120);
+					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
+							bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
 					repaint();
 				}
 			}

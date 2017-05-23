@@ -21,4 +21,9 @@ public class PaintRect {
 		g.setFont(new Font("宋体", Font.BOLD, 30));
 		g.drawString(chString, x + 5, y + 30);
 	}
+	public void drawRwctBc(Graphics g) {
+		g.drawRect(x + 5, y + 5, 30, 30);
+		g.setFont(new Font("宋体", Font.BOLD, 30));
+		g.drawString(chString, x + 5, y + 30);
+	}
 }

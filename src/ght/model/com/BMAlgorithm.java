@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.gson.Gson;
 
@@ -17,22 +18,28 @@ public class BMAlgorithm {
 	private int tLength = 0;
 	private String textStr, patternStr;
 	private Map<String, Integer> bmBc;
+	protected ArrayList<String> mapStr;
+	protected ArrayList<Integer> mapInt;
 	private int[] bmGs;
 	private int[] suffix;
+	protected ArrayList<Integer>bmGss;
 	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
 	private ArrayList<Integer> listM, listN, listL;
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 	private int now = 0;
 	private int i = 0, j = 0;  //i变量用于指向子串，j用于指向主串
-	private int m = 0,n = 0,l = 0;  //m用于指向坏字符数字，n用于指向suffix数组，l用于指向好字符数组
+	private int m = -1,n = -1,l = 0;  //m用于指向坏字符数字，n用于指向suffix数组，l用于指向好字符数组
 
 	public BMAlgorithm(String textStr, String patternStr) {
 		this.textStr = textStr;
 		this.tLength = textStr.length();
 		this.patternStr = patternStr;
 		this.pLength = patternStr.length();
-		bmBc = new HashMap<String, Integer>();
+		bmBc = new TreeMap<String, Integer>();
 		bmGs = new int[pLength];
+		for (int i=0; i<pLength;i++){
+			bmGs[i] = -1;
+		}
 		suffix = new int[pLength];
 		listI = new ArrayList<Integer>();
 		listJ = new ArrayList<Integer>();
@@ -43,6 +50,9 @@ public class BMAlgorithm {
 		listNow = new ArrayList<Integer>();
 		listCharI = new ArrayList<Character>();
 		listCharJ = new ArrayList<Character>();
+		mapInt = new ArrayList<Integer>();
+		mapStr = new ArrayList<String>();
+		bmGss = new ArrayList<Integer>();
 		now = 0;
 	}
 
@@ -80,6 +90,9 @@ public class BMAlgorithm {
 			writeList(i, j, m, n, l, 21);
 			if (!bmBc.containsKey(String.valueOf(patternStr.charAt(i)))) {
 				bmBc.put(String.valueOf(patternStr.charAt(i)), (Integer) (pLength - i - 1));
+				m=bmBc.size()-1;
+				mapStr.add(String.valueOf(patternStr.charAt(i)));
+				mapInt.add((Integer) (pLength - i - 1));
 				writeList(i, j, m, n, l, 22);
 			}
 			writeList(i, j, m, n, l, 23);
@@ -94,25 +107,31 @@ public class BMAlgorithm {
 		n = pLength - 1;
 		suffix[n] = pLength;
 		writeList(i, j, m, n, l, 27);
-		n = 0;
-		writeList(i, j, m, n, l, 28);
-		writeList(i, j, m, n, l, 29);
+		int x = pLength - 1;
+		writeList(i, j, m, x, l, 28);
+		writeList(i, j, m, x, l, 29);
 		for (i = pLength - 2; i >= 0; i--) {
 			n = i;
-			writeList(i, j, m, n, l, 30);
-			writeList(i, j, m, n, l, 31);
+			writeList(i, j, m, x, l, 30);
+			writeList(i, j, m, x, l, 31);
 			while (n >= 0 && patternStr.charAt(n) == patternStr.charAt(pLength - 1 - i + n)) {
 				n--;
-				writeList(i, j, m, n, l, 32);
-				writeList(i, j, m, n, l, 31);
+				writeList(i, j, m, x, l, 32);
+				writeList(i, j, m, x, l, 31);
 			}
-			writeList(i, j, m, n, l, 33);
+			writeList(i, j, m, x, l, 33);
 			suffix[i] = i - n;
-			writeList(i, j, m, n, l, 34);
-			writeList(i, j, m, n, l, 29);
+			writeList(i, j, m, --x, l, 34);
+			writeList(i, j, m, x, l, 29);
 		}
 		writeList(i, j, m, n, l, 35);
 		writeList(i, j, m, n, l, 39);
+	}
+	
+	private void writeBmGs(){
+		for(int a=0;a<pLength;a++){
+			bmGss.add(bmGs[a]);
+		}
 	}
 
 	private void preBmGs() {
@@ -123,6 +142,7 @@ public class BMAlgorithm {
 		// 模式串中没有子串匹配上好后缀，也找不到一个最大前缀
 		for (l = 0; l < pLength; l++) {
 			bmGs[l] = pLength;
+			writeBmGs();
 			writeList(i, j, m, n, l, 41);
 			writeList(i, j, m, n, l, 40);
 		}
@@ -139,6 +159,7 @@ public class BMAlgorithm {
 					writeList(i, j, m, n, l, 47);
 					if (bmGs[l] == pLength) {
 						bmGs[l] = pLength - 1 - n;
+						writeBmGs();
 						writeList(i, j, m, n, l, 48);
 						writeList(i, j, m, n, l, 49);
 					}
@@ -155,12 +176,13 @@ public class BMAlgorithm {
 		for (n = 0; n < pLength - 1; n++) {
 			l = pLength - 1 - suffix[n];
 			bmGs[l] = pLength - 1 - n;
+			writeBmGs();
 			writeList(i, j, m, n, l, 54);
 			writeList(i, j, m, n, l, 55);
 			writeList(i, j, m, n, l, 53);
 		}
 		writeList(i, j, m, n, l, 56);
-		writeList(i, j, m, n, l, 3);
+		writeList(i, j, m, n, l, 4);
 	}
 
 	private int getBmBc(String c, int m) {
@@ -316,5 +338,42 @@ public class BMAlgorithm {
 	public int getJ() {
 		return j;
 	}
+
+	public int getM() {
+		return m;
+	}
+
+	public int getN() {
+		return n;
+	}
+
+	public int getL() {
+		return l;
+	}
+
+	public ArrayList<Integer> getListM() {
+		return listM;
+	}
+
+	public ArrayList<Integer> getListN() {
+		return listN;
+	}
+
+	public ArrayList<Integer> getListL() {
+		return listL;
+	}
+
+	public ArrayList<String> getMapStr() {
+		return mapStr;
+	}
+
+	public ArrayList<Integer> getMapInt() {
+		return mapInt;
+	}
+
+	public ArrayList<Integer> getBmGss() {
+		return bmGss;
+	}
+	
 
 }

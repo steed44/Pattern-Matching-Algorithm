@@ -65,7 +65,7 @@ public class test4 implements ActionListener, ChangeListener {
 		frame.getContentPane().add(menuBarTool, BorderLayout.NORTH);
 		// 左右分栏
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0.5);
+		splitPane.setResizeWeight(0.7);
 		splitPane.setDividerSize(1);
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		// 左边栏上下分栏

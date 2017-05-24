@@ -28,7 +28,9 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 	int panelNum = 0;
 	int k = 0;
 	int wideth;
-
+    /**
+     * 面板切换时，会重置，无法保存其他面板已经执行到的步骤，更改K可以实现
+     */
 	public VarPanel() {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
@@ -40,45 +42,11 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 		g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
 		g.setColor(Color.BLACK);
 
+		int m = 0;
+		int a = 0;
 		if (bfAlgorithm != null) {
 			switch (panelNum) {
 			case 0:
-				g.setColor(Color.CYAN);
-				if (k != 0) {
-					g.fillRect(charX + 25 * k + 50, 0, 25, 600);
-				}
-				g.setColor(Color.BLACK);
-				for (int m = 0; m < k; m++) {
-					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
-					g.drawString(String.valueOf(bfAlgorithm.getListI().get(m)), charX + 25 * m + 80, charY);
-					g.drawString(String.valueOf(bfAlgorithm.getListCharI().get(m)), charX + 25 * m + 80, charY + 22);
-					g.drawString(String.valueOf(bfAlgorithm.getListJ().get(m)), charX + 25 * m + 80, charY + 44);
-					g.drawString(String.valueOf(bfAlgorithm.getListCharJ().get(m)), charX + 25 * m + 80, charY + 66);
-				}
-				break;
-			case 1:
-				g.setColor(Color.CYAN);
-				if (k != 0) {
-					g.fillRect(charX + 25 * k + 50, 0, 25, 600);
-				}
-				g.setColor(Color.BLACK);
-				for (int m = 0; m < k; m++) {
-					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
-					if (kmpAlgorithm.getListJ().get(m) >= 0) {
-						g.drawString(String.valueOf(kmpAlgorithm.getListI().get(m)), charX + 25 * m + 80, charY);
-						g.drawString(String.valueOf(kmpAlgorithm.getListCharI().get(m)), charX + 25 * m + 80,
-								charY + 22);
-						g.drawString(String.valueOf(kmpAlgorithm.getListJ().get(m)), charX + 25 * m + 80, charY + 44);
-						g.drawString(String.valueOf(kmpAlgorithm.getListCharJ().get(m)), charX + 25 * m + 80,
-								charY + 66);
-						g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)]),
-								charX + 25 * m + 80, charY + 88);
-					}
-				}
-				break;
-			case 2:
-				int m = 0;
-				int a = 0;
 				g.setColor(Color.CYAN);
 				if (k != 0) {
 					if (k > 20){
@@ -88,13 +56,56 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 						m = 0;
 						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
 					}
-//					m = k/20;
 				}
 				g.setColor(Color.BLACK);
 				for (; m < k; m++,a++) {
 					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
-					//int a = 0;
-					//变量同步显示有问题
+					g.drawString(String.valueOf(bfAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
+					g.drawString(String.valueOf(bfAlgorithm.getListCharI().get(m)), charX + 25 * a + 80, charY + 22);
+					g.drawString(String.valueOf(bfAlgorithm.getListJ().get(m)), charX + 25 * a + 80, charY + 44);
+					g.drawString(String.valueOf(bfAlgorithm.getListCharJ().get(m)), charX + 25 * a + 80, charY + 66);
+				}
+				break;
+			case 1:
+				g.setColor(Color.CYAN);
+				if (k != 0) {
+					if (k > 20){
+						m = k%20 +(k/20-1)*20;
+						g.fillRect(charX + 25 * 20 + 50, 0, 25, 600);
+					}else {
+						m = 0;
+						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
+					}
+				}
+				g.setColor(Color.BLACK);
+				for (; m < k; m++,a++) {
+					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
+					if (kmpAlgorithm.getListJ().get(m) >= 0) {
+						g.drawString(String.valueOf(kmpAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
+						g.drawString(String.valueOf(kmpAlgorithm.getListCharI().get(m)), charX + 25 * a + 80,
+								charY + 22);
+						g.drawString(String.valueOf(kmpAlgorithm.getListJ().get(m)), charX + 25 * a + 80, charY + 44);
+						g.drawString(String.valueOf(kmpAlgorithm.getListCharJ().get(m)), charX + 25 * a + 80,
+								charY + 66);
+						g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)]),
+								charX + 25 * a + 80, charY + 88);
+					}
+				}
+				break;
+			case 2:
+				g.setColor(Color.CYAN);
+				if (k != 0) {
+					if (k > 20){
+						m = k%20 +(k/20-1)*20;
+						g.fillRect(charX + 25 * 20 + 50, 0, 25, 600);
+					}else {
+						m = 0;
+						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
+					}
+				}
+				g.setColor(Color.BLACK);
+				for (; m < k; m++,a++) {
+					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
 					if (bmAlgorithm.getListI().get(m) >= 0) {
 						g.drawString(String.valueOf(bmAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
 						g.drawString(String.valueOf(bmAlgorithm.getListCharI().get(m)), charX + 25 * a + 80,
@@ -146,7 +157,8 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 			g.drawString("charAt(j)", charX, charY + 66);
 			g.drawString("suffix[n]", charX, charY + 88);
 			g.drawString("bmGs[l]", charX, charY + 110);
-			
+//			setPreferredSize(new Dimension(getWidth(), 150));
+//			setSize(getWidth(), 150); // 两句一起写才有效果，不知道为什么
 			break;
 		default:
 			break;
@@ -164,24 +176,72 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+//		if (bfAlgorithm != null) {
+//			if (e.getActionCommand().equals("上一步")) {
+//				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
+//					k--;
+//					repaint();
+//				}
+//
+//			}
+//			if (e.getActionCommand().equals("下一步")) {
+//				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
+//					k++;
+//					repaint();
+//				}
+//
+//			}
+//
+//		}
 		if (bfAlgorithm != null) {
-			if (e.getActionCommand().equals("上一步")) {
-				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
-					k--;
-					repaint();
+			switch (panelNum) {
+			case 0:
+				if (e.getActionCommand().equals("上一步")) {
+					if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
+						k--;
+						repaint();
+					}
 				}
-
-			}
-			if (e.getActionCommand().equals("下一步")) {
-				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
-					k++;
-					repaint();
+				if (e.getActionCommand().equals("下一步")) {
+					if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
+						k++;
+						repaint();
+					}
 				}
-
+				break;
+			case 1:
+				if (e.getActionCommand().equals("上一步")) {
+					if (k > 0 && k < kmpAlgorithm.getListI().size() - 1) {
+						k--;
+						repaint();
+					}
+				}
+				if (e.getActionCommand().equals("下一步")) {
+					if (k >= 0 && k < kmpAlgorithm.getListI().size() - 2) {
+						k++;
+						repaint();
+					}
+				}
+				break;
+			case 2:
+				if (e.getActionCommand().equals("上一步")) {
+					if (k > 0 && k < bmAlgorithm.getListJ().size() - 1) {
+						k--;
+						repaint();
+					}
+				}
+				if (e.getActionCommand().equals("下一步")) {
+					if (k >= 0 && k < bmAlgorithm.getListJ().size() - 2) {
+						k++;
+						repaint();
+					}
+				}
+				break;
+			default:
+				break;
 			}
 
 		}
-
 	}
 
 	@Override

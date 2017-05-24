@@ -94,14 +94,14 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				}
 				break;
 			case 1:
-				g.fillRect(2, 5, 500, 20);
+				g.fillRect(2, 5, 1000, 20);
 				g.setColor(Color.BLACK);
 				for (int i = 0; i < kmp.kmpStr.length; i++) {
 					g.drawString(kmp.kmpStr[i], 5, 20 + i * 20);
 				}
 				break;
 			case 2:
-				g.fillRect(2, 5, 500, 20);
+				g.fillRect(2, 5, 1000, 20);
 				g.setColor(Color.BLACK);
 				for (int i = 0; i < bm.bmStrings.length; i++) {
 					g.drawString(bm.bmStrings[i], 5, 20 + i * 20);
@@ -193,6 +193,22 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		panelNum = tabbedPane.getSelectedIndex();
 		k = 0;
+		switch (panelNum) {
+		case 0:
+			setPreferredSize(new Dimension(220, 500));
+			setSize(220, 500); // 两句一起写才有效果，不知道为什么
+			break;
+		case 1:
+			setPreferredSize(new Dimension(450, 1000));
+			setSize(450, 1000); // 两句一起写才有效果，不知道为什么
+			break;
+		case 2:
+			setPreferredSize(new Dimension(900, 1300));
+			setSize(900, 1300); // 两句一起写才有效果，不知道为什么
+			break;
+		default:
+			break;
+		}
 		repaint();
 	}
 }

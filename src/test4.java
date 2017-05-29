@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.net.ssl.SSLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -93,7 +95,12 @@ public class test4 implements ActionListener, ChangeListener {
 		// 添加变量显示区
 		variablePanel = new VariablePanel();
 		splitPane_1.setRightComponent(variablePanel);
+		
+		addListener();
 
+	}
+	
+	private void addListener(){
 		// 添加监听事件
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
@@ -103,7 +110,7 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.bfPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
-
+		
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_1.addActionListener(this);
@@ -112,7 +119,7 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.kmpPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
-
+		
 		viewPanel.bmPanel.controlBtnPanel.btnNewButton_3.addActionListener(codePanel.panel);
 		viewPanel.bmPanel.controlBtnPanel.btnNewButton.addActionListener(codePanel.panel);
 		viewPanel.bmPanel.controlBtnPanel.btnNewButton_1.addActionListener(this);
@@ -121,16 +128,16 @@ public class test4 implements ActionListener, ChangeListener {
 		viewPanel.bmPanel.controlBtnPanel.btnNewButton.addActionListener(this);
 		viewPanel.bmPanel.controlBtnPanel.btnNewButton.addActionListener(variablePanel.panel);
 		viewPanel.bmPanel.controlBtnPanel.btnNewButton_3.addActionListener(variablePanel.panel);
-
+		
 		viewPanel.addChangeListener(codePanel.panel);
 		viewPanel.addChangeListener(variablePanel.panel);
 		viewPanel.addChangeListener(this);
-
+		
 		mainDataView.btnNewButton.addActionListener(this);
 		menuBarTool.sample_1.addMenuListener(new sample_1_ActionListener());
 		menuBarTool.sample_2.addMenuListener(new sample_1_ActionListener());
 		menuBarTool.sample_3.addMenuListener(new sample_1_ActionListener());
-
+		
 	}
 
 	// 示例Jmenu的监听事件处理
@@ -204,6 +211,7 @@ public class test4 implements ActionListener, ChangeListener {
 				thread2.start(); // 启动代码同步展示界面的
 				thread2.join(); // 代码同步显示界面的线程结束后再进行下一步
 				thread3.start(); // 启动变量同步展示界面的线程
+				Thread.sleep(menuBarTool.speedX);
 				thread3.join(); // 变量同步显示界面的线程结束后才进行下一步操作
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
@@ -239,7 +247,7 @@ public class test4 implements ActionListener, ChangeListener {
 			case 0:
 				if (viewPanel.bfPanel.isStart == 0) {
 					timer = new Timer();
-					timer.schedule(new MyTask(), 0, 600);
+					timer.schedule(new MyTask(), 0, 200);
 					viewPanel.bfPanel.isStart = 1;
 				}
 
@@ -247,14 +255,14 @@ public class test4 implements ActionListener, ChangeListener {
 			case 1:
 				if (viewPanel.kmpPanel.isStart == 0) {
 					timer = new Timer();
-					timer.schedule(new MyTask(), 0, 600);
+					timer.schedule(new MyTask(), 0, 200);
 					viewPanel.kmpPanel.isStart = 1;
 				}
 				break;
 			case 2:
 				if (viewPanel.bmPanel.isStart == 0) {
 					timer = new Timer();
-					timer.schedule(new MyTask(), 0, 600);
+					timer.schedule(new MyTask(), 0, 200);
 					viewPanel.bmPanel.isStart = 1;
 				}
 				break;
@@ -292,10 +300,12 @@ public class test4 implements ActionListener, ChangeListener {
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
-		timer.cancel();
-		viewPanel.bfPanel.isStart = 0;
-		viewPanel.kmpPanel.isStart = 0;
-		viewPanel.bmPanel.isStart = 0;
+		if (viewPanel.bfPanel.isStart == 1 || viewPanel.kmpPanel.isStart == 1||viewPanel.bmPanel.isStart == 1) {
+			timer.cancel();
+			viewPanel.bfPanel.isStart = 0;
+			viewPanel.kmpPanel.isStart = 0;
+			viewPanel.bmPanel.isStart = 0;
+		}
 	}
 
 }

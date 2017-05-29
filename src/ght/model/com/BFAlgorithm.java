@@ -82,7 +82,7 @@ public class BFAlgorithm {
 		}
 		writeList(13);
 		writeList(14);
-		System.out.println("BF算法比较次数："+count);
+		System.out.println("BF算法比较次数：" + count);
 		if (j == patternStrLength) {
 			writeList(15);
 			writeList(20);

@@ -31,7 +31,7 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 	private KMPAlgorithm kmpAlgorithm = null;
 	private BMAlgorithm bmAlgorithm = null;
 	private int panelNum = 0;
-	private int k = 0;
+	private int k = 0,k1 = 0, k2 = 0;
 	protected Thread thread = new Thread(this);
 
 	public CodeJSPane() {
@@ -45,6 +45,9 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 		kmpAlgorithm = KMPAlgorithm.parseGson();
 		bmAlgorithm = BMAlgorithm.parseGson();
 		k = 0;
+		k1 = 0;
+		k2 = 0;
+		repaint();
 	}
 
 	public void paint(Graphics g) {
@@ -63,8 +66,8 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				}
 				break;
 			case 1:
-				if (k < kmpAlgorithm.getListI().size()) {
-					g.fillRect(2, kmpAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
+				if (k1 < kmpAlgorithm.getListI().size()) {
+					g.fillRect(2, kmpAlgorithm.getListRow().get(k1) * 20 - 15, 1000, 20);
 					g.setColor(Color.BLACK);
 					for (int i = 0; i < kmp.kmpStr.length; i++) {
 						g.drawString(kmp.kmpStr[i], 5, 20 + i * 20);
@@ -72,8 +75,8 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				}
 				break;
 			case 2:
-				if (k < bmAlgorithm.getListI().size()) {
-					g.fillRect(2, bmAlgorithm.getListRow().get(k) * 20 - 15, 1000, 20);
+				if (k2 < bmAlgorithm.getListI().size()) {
+					g.fillRect(2, bmAlgorithm.getListRow().get(k2) * 20 - 15, 1000, 20);
 					g.setColor(Color.BLACK);
 					for (int i = 0; i < bm.bmStrings.length; i++) {
 						g.drawString(bm.bmStrings[i], 5, 20 + i * 20);
@@ -133,28 +136,28 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 				break;
 			case 1:
 				if (e.getActionCommand().equals("上一步")) {
-					if (k > 0 && k < kmpAlgorithm.getListI().size() - 1) {
-						k--;
+					if (k1 > 0 && k1 < kmpAlgorithm.getListI().size() - 1) {
+						k1--;
 						repaint();
 					}
 				}
 				if (e.getActionCommand().equals("下一步")) {
-					if (k >= 0 && k < kmpAlgorithm.getListI().size() - 2) {
-						k++;
+					if (k1 >= 0 && k1 < kmpAlgorithm.getListI().size() - 2) {
+						k1++;
 						repaint();
 					}
 				}
 				break;
 			case 2:
 				if (e.getActionCommand().equals("上一步")) {
-					if (k > 0 && k < bmAlgorithm.getListJ().size() - 1) {
-						k--;
+					if (k2 > 0 && k2 < bmAlgorithm.getListJ().size() - 1) {
+						k2--;
 						repaint();
 					}
 				}
 				if (e.getActionCommand().equals("下一步")) {
-					if (k >= 0 && k < bmAlgorithm.getListJ().size() - 2) {
-						k++;
+					if (k2 >= 0 && k2 < bmAlgorithm.getListJ().size() - 2) {
+						k2++;
 						repaint();
 					}
 				}
@@ -168,17 +171,29 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 
 	public void run() {
 		// TODO Auto-generated method stub
-		k++;
+		switch (panelNum) {
+		case 0:
+			k++;
+			break;
+		case 1:
+			k1++;
+			break;
+		case 2:
+			k2++;
+			break;
+		default:
+			break;
+		}
 		repaint();
 	}
 
-	public void setK(int k) {
-		this.k = k;
-	}
-
-	public int getK() {
-		return k;
-	}
+//	public void setK(int k) {
+//		this.k = k;
+//	}
+//
+//	public int getK() {
+//		return k;
+//	}
 
 	public int getPanelNum() {
 		return panelNum;
@@ -192,7 +207,7 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 	public void stateChanged(ChangeEvent e) {
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		panelNum = tabbedPane.getSelectedIndex();
-		k = 0;
+//		k = 0;
 		switch (panelNum) {
 		case 0:
 			setPreferredSize(new Dimension(220, 500));

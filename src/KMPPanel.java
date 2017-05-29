@@ -74,7 +74,7 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 			}
 			pIndicator.drawTextIndicator(g);
 			pIndicator.drawPatternIndicator(g);
-			//画next数组
+			// 画next数组
 			g.setFont(new Font("宋体", Font.BOLD, 22));
 			g.drawString("next[]:", 5, 225);
 			if (kmpAlgorithm.getListRow().get(k) < 18) {

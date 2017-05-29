@@ -30,7 +30,7 @@ public class KMPAlgorithm {
 		getNextArry();
 	}
 
-	public void writeList(int i, int j,  char a, char b, int row) {
+	public void writeList(int i, int j, char a, char b, int row) {
 		listI.add(i);
 		listJ.add(j);
 		listCharI.add(a);
@@ -58,7 +58,7 @@ public class KMPAlgorithm {
 			} else {
 				writeList(i, j, ' ', ' ', 26);
 				j = next[j];
-				//添加now值,以便记录位置
+				// 添加now值,以便记录位置
 				writeList(i, j, ' ', ' ', 27);
 				writeList(i, j, ' ', ' ', 28);
 				if (j == -1) {
@@ -70,13 +70,12 @@ public class KMPAlgorithm {
 					writeList(i, j, ' ', ' ', 32);
 					writeList(i, j, ' ', ' ', 21);
 				}
-				if (j == 0){
+				if (j == 0) {
 					now = i;
+				} else {
+					now += substr.length() - j - 1;
 				}
-				else {
-					now += substr.length()-j-1; 
-				}
-				
+
 				writeList(i, j, ' ', ' ', 32);
 				writeList(i, j, ' ', ' ', 21);
 			}
@@ -108,12 +107,12 @@ public class KMPAlgorithm {
 		i = -1;
 		writeList(i, j, ' ', ' ', 3);
 		next[0] = -1;
-		writeList(i, j, ' ', ' ',4);
+		writeList(i, j, ' ', ' ', 4);
 		while (j < substr.length() - 1) {
 			writeList(i, j, ' ', ' ', 5);
-			//这里可以加一个判断i的值,流程添加不完善,要改
+			// 这里可以加一个判断i的值,流程添加不完善,要改
 			if (i == -1 || substr.charAt(j) == substr.charAt(i)) {
-				writeList(i, j, substr.charAt(j+1), substr.charAt(i+1), 6);
+				writeList(i, j, substr.charAt(j + 1), substr.charAt(i + 1), 6);
 				if (substr.charAt(j + 1) == substr.charAt(i + 1)) {
 					next[++j] = next[++i];
 					writeList(i, j, ' ', ' ', 7);
@@ -270,5 +269,5 @@ public class KMPAlgorithm {
 	public void setListNow(ArrayList<Integer> listNow) {
 		this.listNow = listNow;
 	}
-	
+
 }

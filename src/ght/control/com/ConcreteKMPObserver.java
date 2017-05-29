@@ -9,7 +9,7 @@ import ght.model.com.KMPAlgorithm;
 public class ConcreteKMPObserver implements Observer {
 	private KMPAlgorithm KMPAlgorithm;
 	private GetData getData = new GetData();
-	
+
 	public void update(Observable o, Object arg) {
 		getData.setTextStr(((GetData) arg).getTextStr());
 		getData.setPatternStr(((GetData) arg).getPatternStr());
@@ -33,5 +33,5 @@ public class ConcreteKMPObserver implements Observer {
 	public void setGetData(GetData getData) {
 		this.getData = getData;
 	}
-	
+
 }

@@ -26,11 +26,12 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 	private BMAlgorithm bmAlgorithm = null;
 	int charY = 20, charX = 5;
 	int panelNum = 0;
-	int k = 0;
+	int k = 0,k1 = 0, k2 = 0;
 	int wideth;
-    /**
-     * 面板切换时，会重置，无法保存其他面板已经执行到的步骤，更改K可以实现
-     */
+
+	/**
+	 * 面板切换时，会重置，无法保存其他面板已经执行到的步骤，更改K可以实现
+	 */
 	public VarPanel() {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
@@ -49,16 +50,16 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 			case 0:
 				g.setColor(Color.CYAN);
 				if (k != 0) {
-					if (k > 20){
-						m = k%20 +(k/20-1)*20;
+					if (k > 20) {
+						m = k % 20 + (k / 20 - 1) * 20;
 						g.fillRect(charX + 25 * 20 + 50, 0, 25, 600);
-					}else {
+					} else {
 						m = 0;
 						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
 					}
 				}
 				g.setColor(Color.BLACK);
-				for (; m < k; m++,a++) {
+				for (; m < k; m++, a++) {
 					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
 					g.drawString(String.valueOf(bfAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
 					g.drawString(String.valueOf(bfAlgorithm.getListCharI().get(m)), charX + 25 * a + 80, charY + 22);
@@ -68,17 +69,17 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				break;
 			case 1:
 				g.setColor(Color.CYAN);
-				if (k != 0) {
-					if (k > 20){
-						m = k%20 +(k/20-1)*20;
+				if (k1 != 0) {
+					if (k1 > 20) {
+						m = k1 % 20 + (k1 / 20 - 1) * 20;
 						g.fillRect(charX + 25 * 20 + 50, 0, 25, 600);
-					}else {
+					} else {
 						m = 0;
-						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
+						g.fillRect(charX + 25 * k1 + 50, 0, 25, 600);
 					}
 				}
 				g.setColor(Color.BLACK);
-				for (; m < k; m++,a++) {
+				for (; m < k1; m++, a++) {
 					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
 					if (kmpAlgorithm.getListJ().get(m) >= 0) {
 						g.drawString(String.valueOf(kmpAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
@@ -94,17 +95,17 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				break;
 			case 2:
 				g.setColor(Color.CYAN);
-				if (k != 0) {
-					if (k > 20){
-						m = k%20 +(k/20-1)*20;
+				if (k2 != 0) {
+					if (k2 > 20) {
+						m = k2 % 20 + (k2 / 20 - 1) * 20;
 						g.fillRect(charX + 25 * 20 + 50, 0, 25, 600);
-					}else {
+					} else {
 						m = 0;
-						g.fillRect(charX + 25 * k + 50, 0, 25, 600);
+						g.fillRect(charX + 25 * k2 + 50, 0, 25, 600);
 					}
 				}
 				g.setColor(Color.BLACK);
-				for (; m < k; m++,a++) {
+				for (; m < k2; m++, a++) {
 					g.setFont(new Font("TimesRoman", Font.ITALIC, 20));
 					if (bmAlgorithm.getListI().get(m) >= 0) {
 						g.drawString(String.valueOf(bmAlgorithm.getListI().get(m)), charX + 25 * a + 80, charY);
@@ -116,13 +117,13 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 						g.drawString(String.valueOf(bmAlgorithm.getListCharJ().get(m)), charX + 25 * a + 80,
 								charY + 66);
 					}
-					if(bmAlgorithm.getListN().get(m) >= 0){
+					if (bmAlgorithm.getListN().get(m) >= 0) {
 						g.drawString(String.valueOf(bmAlgorithm.getSuffix()[bmAlgorithm.getListN().get(m)]),
 								charX + 25 * a + 80, charY + 88);
 					}
-					if(bmAlgorithm.getBmGsToListL().get(m) >= 0){
-						g.drawString(String.valueOf(bmAlgorithm.getBmGsToListL().get(m)),
-								charX + 25 * a + 80, charY + 110);
+					if (bmAlgorithm.getBmGsToListL().get(m) >= 0) {
+						g.drawString(String.valueOf(bmAlgorithm.getBmGsToListL().get(m)), charX + 25 * a + 80,
+								charY + 110);
 					}
 				}
 				break;
@@ -157,8 +158,8 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 			g.drawString("charAt(j)", charX, charY + 66);
 			g.drawString("suffix[n]", charX, charY + 88);
 			g.drawString("bmGs[l]", charX, charY + 110);
-//			setPreferredSize(new Dimension(getWidth(), 150));
-//			setSize(getWidth(), 150); // 两句一起写才有效果，不知道为什么
+			// setPreferredSize(new Dimension(getWidth(), 150));
+			// setSize(getWidth(), 150); // 两句一起写才有效果，不知道为什么
 			break;
 		default:
 			break;
@@ -171,28 +172,31 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 		kmpAlgorithm = KMPAlgorithm.parseGson();
 		bmAlgorithm = BMAlgorithm.parseGson();
 		k = 0;
+		k1 = 0;
+		k2 = 0;
+		repaint();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-//		if (bfAlgorithm != null) {
-//			if (e.getActionCommand().equals("上一步")) {
-//				if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
-//					k--;
-//					repaint();
-//				}
-//
-//			}
-//			if (e.getActionCommand().equals("下一步")) {
-//				if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
-//					k++;
-//					repaint();
-//				}
-//
-//			}
-//
-//		}
+		// if (bfAlgorithm != null) {
+		// if (e.getActionCommand().equals("上一步")) {
+		// if (k > 0 && k < bfAlgorithm.getListI().size() - 1) {
+		// k--;
+		// repaint();
+		// }
+		//
+		// }
+		// if (e.getActionCommand().equals("下一步")) {
+		// if (k >= 0 && k < bfAlgorithm.getListI().size() - 2) {
+		// k++;
+		// repaint();
+		// }
+		//
+		// }
+		//
+		// }
 		if (bfAlgorithm != null) {
 			switch (panelNum) {
 			case 0:
@@ -211,28 +215,28 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 				break;
 			case 1:
 				if (e.getActionCommand().equals("上一步")) {
-					if (k > 0 && k < kmpAlgorithm.getListI().size() - 1) {
-						k--;
+					if (k1 > 0 && k1 < kmpAlgorithm.getListI().size() - 1) {
+						k1--;
 						repaint();
 					}
 				}
 				if (e.getActionCommand().equals("下一步")) {
-					if (k >= 0 && k < kmpAlgorithm.getListI().size() - 2) {
-						k++;
+					if (k1 >= 0 && k1 < kmpAlgorithm.getListI().size() - 2) {
+						k1++;
 						repaint();
 					}
 				}
 				break;
 			case 2:
 				if (e.getActionCommand().equals("上一步")) {
-					if (k > 0 && k < bmAlgorithm.getListJ().size() - 1) {
-						k--;
+					if (k2 > 0 && k2 < bmAlgorithm.getListJ().size() - 1) {
+						k2--;
 						repaint();
 					}
 				}
 				if (e.getActionCommand().equals("下一步")) {
-					if (k >= 0 && k < bmAlgorithm.getListJ().size() - 2) {
-						k++;
+					if (k2 >= 0 && k2 < bmAlgorithm.getListJ().size() - 2) {
+						k2++;
 						repaint();
 					}
 				}
@@ -247,7 +251,19 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		k++;
+		switch (panelNum) {
+		case 0:
+			k++;
+			break;
+		case 1:
+			k1++;
+			break;
+		case 2:
+			k2++;
+			break;
+		default:
+			break;
+		}
 		repaint();
 	}
 
@@ -256,7 +272,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 		// TODO Auto-generated method stub
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		panelNum = tabbedPane.getSelectedIndex();
-		k = 0;
+//		k = 0;
 		repaint();
 	}
 

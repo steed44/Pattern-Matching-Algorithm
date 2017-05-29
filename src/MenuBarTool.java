@@ -71,7 +71,7 @@ public class MenuBarTool extends JMenuBar {
 		sample_3_2.setEnabled(false);
 
 		// 添加编辑菜单
-		edit = new JMenu("编辑");
+		edit = new JMenu("调速");
 		menuBar.add(edit);
 
 		// 添加编辑菜单

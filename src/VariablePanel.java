@@ -12,7 +12,7 @@ public class VariablePanel extends JScrollPane {
 	/**
 	 * Create the panel.
 	 */
-//	Thread t = new Thread(this);
+	// Thread t = new Thread(this);
 	protected VarPanel panel = new VarPanel();
 
 	public VariablePanel() {
@@ -21,13 +21,12 @@ public class VariablePanel extends JScrollPane {
 		setViewportView(panel);
 		setPreferredSize(new Dimension(getWidth(), 45));
 		setSize(getWidth(), 45); // 两句一起写才有效果，不知道为什么
-		//t.start();
+		// t.start();
 
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
 	}
-
 
 }

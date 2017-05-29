@@ -28,18 +28,16 @@ public class MainTest {
 		KMPAlgorithm kmpAlgorithm = new KMPAlgorithm(aString, bString);
 		num = kmpAlgorithm.mainAlgorithm();
 		System.out.println(num);
-		if(num == -1)
-		{
+		if (num == -1) {
 			System.out.println("匹配失败");
 		}
-//		for (int i = 0; i < 6; i++)
-//			System.out.println(kmpAlgorithm.next[i]);
+		// for (int i = 0; i < 6; i++)
+		// System.out.println(kmpAlgorithm.next[i]);
 
-		//BM算法测试
+		// BM算法测试
 		BMAlgorithm bmAlgorithm = new BMAlgorithm(aString, bString);
 		num = bmAlgorithm.boyerMoore();
 		System.out.println(num);
 	}
-	
 
 }

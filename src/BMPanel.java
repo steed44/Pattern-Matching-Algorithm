@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -63,18 +62,18 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 			g.setFont(new Font("宋体", Font.BOLD, 30));
 			g.drawString("主串:", 5, 58);
 			for (int i = 0; i < bmAlgorithm.gettLength(); i++) {
-				p = new PaintRect(String.valueOf(bmAlgorithm.getTextStr().charAt(i)), i * 30+80, 30);
-				p.drawRwct(g,i);
+				p = new PaintRect(String.valueOf(bmAlgorithm.getTextStr().charAt(i)), i * 30 + 80, 30);
+				p.drawRwct(g, i);
 			}
 			g.setFont(new Font("宋体", Font.BOLD, 30));
 			g.drawString("字串:", 5, 150);
 			for (int i = 0; i < bmAlgorithm.getpLength(); i++) {
-				q = new PaintRect(String.valueOf(bmAlgorithm.getPatternStr().charAt(i)), star + i * 30+80, 120);
+				q = new PaintRect(String.valueOf(bmAlgorithm.getPatternStr().charAt(i)), star + i * 30 + 80, 120);
 				q.drawRwct(g, i);
 			}
-			pIndicator.drawIndicatorX(g,"j");
-			pIndicator.drawIndicatorX(g,"i");
-			//画bmBc数组（坏字符）
+			pIndicator.drawIndicatorX(g, "j");
+			pIndicator.drawIndicatorX(g, "i");
+			// 画bmBc数组（坏字符）
 			g.setFont(new Font("宋体", Font.BOLD, 22));
 			g.drawString("bmBc[]:", 5, 230);
 			if (bmAlgorithm.getListRow().get(k) < 3 || bmAlgorithm.getListRow().get(k) > 18) {
@@ -99,12 +98,13 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 					q.drawRwctBc(g);
 				}
 			}
-			//画suffix数组
+			// 画suffix数组
 			g.setFont(new Font("宋体", Font.BOLD, 22));
 			g.drawString("suffix[]:", 5, 300);
-			if (bmAlgorithm.getListRow().get(k) < 4 || (bmAlgorithm.getListRow().get(k) > 18 && bmAlgorithm.getListRow().get(k) < 40)) {
-				for (int i = bmAlgorithm.getpLength()-1; i >=0 ; i--) {
-					if (i >= bmAlgorithm.getListN().get(k) && bmAlgorithm.getListN().get(k)>=0) {
+			if (bmAlgorithm.getListRow().get(k) < 4
+					|| (bmAlgorithm.getListRow().get(k) > 18 && bmAlgorithm.getListRow().get(k) < 40)) {
+				for (int i = bmAlgorithm.getpLength() - 1; i >= 0; i--) {
+					if (i >= bmAlgorithm.getListN().get(k) && bmAlgorithm.getListN().get(k) >= 0) {
 						q = new PaintRect((String.valueOf(bmAlgorithm.getSuffix()[i])), i * 30 + 97, 270);
 						q.drawRwct(g, i);
 					} else {
@@ -118,18 +118,21 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 					q.drawRwct(g, i);
 				}
 			}
-			
-			//画bmGs数组（好字符）
+
+			// 画bmGs数组（好字符）
 			g.setFont(new Font("宋体", Font.BOLD, 22));
 			g.drawString("bmGs[]:", 5, 375);
-			if(bmAlgorithm.getListRow().get(k) == 41 || bmAlgorithm.getListRow().get(k) == 48 ||bmAlgorithm.getListRow().get(k) == 54){
+			if (bmAlgorithm.getListRow().get(k) == 41 || bmAlgorithm.getListRow().get(k) == 48
+					|| bmAlgorithm.getListRow().get(k) == 54) {
 				BmGsNow++;
 			}
 			for (int i = 0; i < bmAlgorithm.getBmGs().length; i++) {
-				if (BmGsNow != -1 && bmAlgorithm.getBmGss().get(BmGsNow*bmAlgorithm.getpLength()+i) != -1){
-					q = new PaintRect((String.valueOf(bmAlgorithm.getBmGss().get(BmGsNow*bmAlgorithm.getpLength()+i))), i * 30 + 97, 345);
+				if (BmGsNow != -1 && bmAlgorithm.getBmGss().get(BmGsNow * bmAlgorithm.getpLength() + i) != -1) {
+					q = new PaintRect(
+							(String.valueOf(bmAlgorithm.getBmGss().get(BmGsNow * bmAlgorithm.getpLength() + i))),
+							i * 30 + 97, 345);
 					q.drawRwct(g, i);
-				}else{
+				} else {
 					q = new PaintRect(" ", i * 30 + 97, 345);
 					q.drawRwct(g, i);
 				}
@@ -137,13 +140,12 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 		}
 	}
 
-
 	@Override
 	public void run() {
 		if (k < bmAlgorithm.getListI().size()) {
 			star = bmAlgorithm.getListNow().get(++k) * 30;
-			pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
-					bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
+			pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30 + 80, 30,
+					bmAlgorithm.getListI().get(k) * 30 + 80 + star, 120);
 			repaint();
 		}
 
@@ -157,10 +159,11 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 				if (k > 0 && k < bmAlgorithm.getListJ().size() - 1) {
 					k--;
 					star = bmAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
-							bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
-					if(bmAlgorithm.getListRow().get(k) == 41 || bmAlgorithm.getListRow().get(k) == 48 ||bmAlgorithm.getListRow().get(k) == 54){
-						BmGsNow-=2;
+					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30 + 80, 30,
+							bmAlgorithm.getListI().get(k) * 30 + 80 + star, 120);
+					if (bmAlgorithm.getListRow().get(k) == 41 || bmAlgorithm.getListRow().get(k) == 48
+							|| bmAlgorithm.getListRow().get(k) == 54) {
+						BmGsNow -= 2;
 					}
 					repaint();
 				}
@@ -170,8 +173,8 @@ public class BMPanel extends JPanel implements Runnable, ActionListener {
 				if (k >= 0 && k < bmAlgorithm.getListJ().size() - 2) {
 					k++;
 					star = bmAlgorithm.getListNow().get(k) * 30;
-					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30+80, 30,
-							bmAlgorithm.getListI().get(k) * 30+80 + star, 120);
+					pIndicator = new PaintIndicator(bmAlgorithm.getListJ().get(k) * 30 + 80, 30,
+							bmAlgorithm.getListI().get(k) * 30 + 80 + star, 120);
 					repaint();
 				}
 			}

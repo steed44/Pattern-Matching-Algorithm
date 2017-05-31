@@ -27,11 +27,11 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 	private BF bf = new BF();
 	private KMP kmp = new KMP();
 	private BM bm = new BM();
-	private BFAlgorithm bfAlgorithm = null;
-	private KMPAlgorithm kmpAlgorithm = null;
-	private BMAlgorithm bmAlgorithm = null;
+	protected BFAlgorithm bfAlgorithm = null;
+	protected KMPAlgorithm kmpAlgorithm = null;
+	protected BMAlgorithm bmAlgorithm = null;
 	private int panelNum = 0;
-	private int k = 0,k1 = 0, k2 = 0;
+	protected int k = 0,k1 = 0, k2 = 0;
 	protected Thread thread = new Thread(this);
 
 	public CodeJSPane() {
@@ -201,6 +201,15 @@ public class CodeJSPane extends JPanel implements Runnable, ActionListener, Chan
 
 	public void setPanelNum(int panelNum) {
 		this.panelNum = panelNum;
+	}
+	
+
+	public int getK1() {
+		return k1;
+	}
+
+	public int getK2() {
+		return k2;
 	}
 
 	@Override

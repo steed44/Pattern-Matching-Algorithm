@@ -93,8 +93,8 @@ public class MenuBarTool extends JMenuBar {
 		speed.add(speed5);
 
 		// 添加编辑菜单
-		help = new JMenu("帮助");
-		menuBar.add(help);
+		//help = new JMenu("帮助");
+		//menuBar.add(help);
 		
 		dealActionListener();
 

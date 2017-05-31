@@ -32,6 +32,7 @@ public class CodePanel extends JScrollPane implements Runnable, ActionListener {
 	 */
 
 	protected CodeJSPane panel = new CodeJSPane();
+	JScrollBar scrollBar = null;
 
 	// Thread t = new Thread(this);
 	public CodePanel() {
@@ -41,6 +42,8 @@ public class CodePanel extends JScrollPane implements Runnable, ActionListener {
 		setViewportView(panel);
 		setPreferredSize(new Dimension(250, 1000));
 		setSize(250, 1000); 
+		scrollBar = getVerticalScrollBar(); // 得到垂直方向的滚动条
+//		scrollBar.setValue(scrollBar.getMaximum()); // 设置滚动条为最大值
 
 		setBackground(Color.WHITE);
 
@@ -59,6 +62,23 @@ public class CodePanel extends JScrollPane implements Runnable, ActionListener {
 	class MyTask extends TimerTask {
 		@Override
 		public void run() {
+			if (panel.bfAlgorithm != null) {
+				switch (panel.getPanelNum()) {
+				case 1:
+					int m = panel.k1;
+					if(panel.kmpAlgorithm.getListRow().get(m) > 24){
+						scrollBar.setValue(scrollBar.getMaximum()); // 设置滚动条为最大值
+					} else {
+						scrollBar.setValue(scrollBar.getMinimum()); // 设置滚动条为最大值
+					}
+					break;
+				case 2:
+					
+					break;
+				default:
+					break;
+				}	
+			}
 			// int a = panel
 			// if (panel.k * 16 + 200 >= panel.getWidth()) {
 			// panel.setPreferredSize(new Dimension(panel.k * 25 + 200,
@@ -73,8 +93,7 @@ public class CodePanel extends JScrollPane implements Runnable, ActionListener {
 			// 两句一起写才有效果，不知道为什么
 			// }
 
-			// JScrollBar scrollBar = getHorizontalScrollBar(); // 得到水平方向的滚动条
-			// scrollBar.setValue(scrollBar.getMaximum()); // 设置滚动条为最大值
+
 		}
 
 	}

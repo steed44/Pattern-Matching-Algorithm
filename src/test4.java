@@ -169,13 +169,13 @@ public class test4 implements ActionListener, ChangeListener {
 	}
 
 	class MyTask extends TimerTask {
-		Thread thread1;
+		Thread thread1 = null;
 
 		@Override
 		public void run() {
 			switch (codePanel.panel.getPanelNum()) {
 			case 0:
-				if (viewPanel.bfPanel.k >= viewPanel.bfPanel.bfAlgorithm.getListI().size()) {
+				if (viewPanel.bfPanel.k >= viewPanel.bfPanel.bfAlgorithm.getListI().size()-2) {
 					timer.cancel();
 					viewPanel.bfPanel.isStart = 0;
 				} else {
@@ -184,7 +184,7 @@ public class test4 implements ActionListener, ChangeListener {
 
 				break;
 			case 1:
-				if (viewPanel.kmpPanel.k >= viewPanel.kmpPanel.kmpAlgorithm.getListI().size()) {
+				if (viewPanel.kmpPanel.k >= viewPanel.kmpPanel.kmpAlgorithm.getListI().size()-2) {
 					timer.cancel();
 					viewPanel.kmpPanel.isStart = 0;
 				} else {
@@ -192,7 +192,7 @@ public class test4 implements ActionListener, ChangeListener {
 				}
 				break;
 			case 2:
-				if (viewPanel.bmPanel.k >= viewPanel.bmPanel.bmAlgorithm.getListI().size()) {
+				if (viewPanel.bmPanel.k >= viewPanel.bmPanel.bmAlgorithm.getListI().size()-2) {
 					timer.cancel();
 					viewPanel.bmPanel.isStart = 0;
 				} else {
@@ -203,16 +203,18 @@ public class test4 implements ActionListener, ChangeListener {
 				break;
 			}
 
-			Thread thread2 = new Thread(codePanel.panel);
-			Thread thread3 = new Thread(variablePanel.panel);
 			try {
-				thread1.start(); // 启动主显示界面的线程
-				thread1.join(); // 主显示界面线程结束后才进行下一步
-				thread2.start(); // 启动代码同步展示界面的
-				thread2.join(); // 代码同步显示界面的线程结束后再进行下一步
-				thread3.start(); // 启动变量同步展示界面的线程
-				Thread.sleep(menuBarTool.speedX);
-				thread3.join(); // 变量同步显示界面的线程结束后才进行下一步操作
+				if(thread1 != null){
+					Thread thread2 = new Thread(codePanel.panel);
+					Thread thread3 = new Thread(variablePanel.panel);
+					thread1.start(); // 启动主显示界面的线程
+					thread1.join(); // 主显示界面线程结束后才进行下一步
+					thread2.start(); // 启动代码同步展示界面的
+					thread2.join(); // 代码同步显示界面的线程结束后再进行下一步
+					thread3.start(); // 启动变量同步展示界面的线程
+					Thread.sleep(menuBarTool.speedX);
+					thread3.join(); // 变量同步显示界面的线程结束后才进行下一步操作
+				}
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}

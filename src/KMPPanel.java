@@ -126,7 +126,7 @@ public class KMPPanel extends JPanel implements Runnable, ActionListener {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		if (k < kmpAlgorithm.getListI().size()) {
+		if (k < kmpAlgorithm.getListI().size()-1) {
 			star = kmpAlgorithm.getListNow().get(++k) * 30;
 			pIndicator = new PaintIndicator(kmpAlgorithm.getListI().get(k) * 30 + 80, 30,
 					kmpAlgorithm.getListJ().get(k) * 30 + 80 + star, 120);

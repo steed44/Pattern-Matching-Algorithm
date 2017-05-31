@@ -88,8 +88,13 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 						g.drawString(String.valueOf(kmpAlgorithm.getListJ().get(m)), charX + 25 * a + 80, charY + 44);
 						g.drawString(String.valueOf(kmpAlgorithm.getListCharJ().get(m)), charX + 25 * a + 80,
 								charY + 66);
-						g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)]),
-								charX + 25 * a + 80, charY + 88);
+						if(kmpAlgorithm.getListJ().get(m) == kmpAlgorithm.getNext().length){
+							g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)-1]),
+									charX + 25 * a + 80, charY + 88);
+						}else{
+							g.drawString(String.valueOf(kmpAlgorithm.getNext()[kmpAlgorithm.getListJ().get(m)]),
+									charX + 25 * a + 80, charY + 88);
+						}
 					}
 				}
 				break;

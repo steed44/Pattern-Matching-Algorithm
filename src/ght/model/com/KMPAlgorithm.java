@@ -12,7 +12,8 @@ import com.google.gson.Gson;
 public class KMPAlgorithm {
 	private String substr, str;
 	protected int[] next = null;
-	protected int j, i, now = 0;
+	private boolean isTrue = false;
+	protected int j, i, now = 0,times = 0;
 	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 
@@ -41,13 +42,14 @@ public class KMPAlgorithm {
 
 	// KMP算法主体
 	public int mainAlgorithm() {
+		times = 0;
 		writeList(-2, -2, ' ', ' ', 19);
 		writeList(i, j, ' ', ' ', 20);
-		int i = 0, j = 0, n = 0;
+		int i = 0, j = 0;
 		writeList(i, j, ' ', ' ', 21);
 		while (i < str.length() && j < substr.length()) {
 			writeList(i, j, str.charAt(i), substr.charAt(j), 22);
-			n++;
+			times++;
 			if (str.charAt(i) == substr.charAt(j)) {
 				++i;
 				writeList(i, j, ' ', ' ', 23);
@@ -80,21 +82,21 @@ public class KMPAlgorithm {
 				writeList(i, j, ' ', ' ', 21);
 			}
 		}
-		System.out.println("KMP算法比较次数" + n);
+		System.out.println("KMP算法比较次数" + times);
 		writeList(i, j, ' ', ' ', 33);
 		writeList(i, j, ' ', ' ', 34);
 		if (j == substr.length()) {
 			writeList(i, j, ' ', ' ', 35);
 			writeList(i, j, ' ', ' ', 36);
 			writeList(i, j, ' ', ' ', 40);
-			System.out.println("匹配成功");
+			isTrue = true;
 			return i - substr.length() + 1;
 		} else {
 			writeList(i, j, ' ', ' ', 37);
 			writeList(i, j, ' ', ' ', 38);
 			writeList(i, j, ' ', ' ', 39);
 			writeList(i, j, ' ', ' ', 40);
-			System.out.println("匹配失败");
+			isTrue = false;
 			return -1;
 		}
 	}
@@ -189,7 +191,9 @@ public class KMPAlgorithm {
 	public void setStr(String str) {
 		this.str = str;
 	}
-
+	public int getTimes() {
+		return times;
+	}
 	public int getJ() {
 		return j;
 	}
@@ -268,6 +272,10 @@ public class KMPAlgorithm {
 
 	public void setListNow(ArrayList<Integer> listNow) {
 		this.listNow = listNow;
+	}
+
+	public boolean isTrue() {
+		return isTrue;
 	}
 
 }

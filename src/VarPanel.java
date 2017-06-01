@@ -45,7 +45,23 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 
 		int m = 0;
 		int a = 0;
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("宋体", Font.ITALIC, 20));
+		g.fillRect(580, 0, 1, 600);
+		g.drawString("主串长度:", 585, charY);
+		
+		g.drawString("子串长度:", 585, charY + 22);
+		g.drawString("匹配次数:", 585, charY + 44);
+		g.drawString("匹配结果:", 585, charY + 66);
+		
 		if (bfAlgorithm != null) {
+			g.drawString(String.valueOf(bfAlgorithm.getTextStrLength()), 680, charY);
+			g.drawString(String.valueOf(bfAlgorithm.getPatternStrLength()), 680, charY+22);
+			if(kmpAlgorithm.isTrue()){
+				g.drawString("成功", 680, charY+66);
+			}else{
+				g.drawString("失败", 680, charY+66);
+			}
 			switch (panelNum) {
 			case 0:
 				g.setColor(Color.CYAN);
@@ -66,6 +82,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 					g.drawString(String.valueOf(bfAlgorithm.getListJ().get(m)), charX + 25 * a + 80, charY + 44);
 					g.drawString(String.valueOf(bfAlgorithm.getListCharJ().get(m)), charX + 25 * a + 80, charY + 66);
 				}
+				g.drawString(String.valueOf(bfAlgorithm.getTimes()), 680, charY+44);
 				break;
 			case 1:
 				g.setColor(Color.CYAN);
@@ -97,6 +114,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 						}
 					}
 				}
+				g.drawString(String.valueOf(kmpAlgorithm.getTimes()), 680, charY+44);
 				break;
 			case 2:
 				g.setColor(Color.CYAN);
@@ -131,6 +149,7 @@ public class VarPanel extends JPanel implements Runnable, ActionListener, Change
 								charY + 110);
 					}
 				}
+				g.drawString(String.valueOf(bmAlgorithm.getTimes()), 680, charY+44);
 				break;
 			default:
 				break;

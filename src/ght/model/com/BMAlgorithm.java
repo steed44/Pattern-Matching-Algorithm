@@ -23,6 +23,7 @@ public class BMAlgorithm {
 	private int[] bmGs;
 	private int[] suffix;
 	protected ArrayList<Integer> bmGss, bmGsToListL;
+	protected int times = 0;
 	private ArrayList<Integer> listI, listJ, listRow, listNow; // 记录i的值，j的值，和行号
 	private ArrayList<Integer> listM, listN, listL;
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
@@ -63,7 +64,7 @@ public class BMAlgorithm {
 		listJ.add(j);
 		if (j == tLength && j != 0) {
 			listCharJ.add(textStr.charAt(j - 1));
-		} else if (j >= 0) {
+		} else if (j >= 0 && j <tLength) {
 			listCharJ.add(textStr.charAt(j));
 		} else {
 			listCharJ.add(' ');
@@ -217,13 +218,13 @@ public class BMAlgorithm {
 		writeList(i, j, m, n, l, 4);
 		i = 0;
 		writeList(i, j, m, n, l, 5);
-		int count = 0;
+		
 		writeList(i, j, m, n, l, 6);
 		writeList(i, j, m, n, l, 7);
 		while (j <= tLength - pLength) {
 			writeList(i, i + j, m, n, l, 8);
 			for (i = pLength - 1; i >= 0 && patternStr.charAt(i) == textStr.charAt(i + j); i--) { // 用于计数
-				count++;
+				times++;
 				writeList(i, i + j, m, n, l, 9);
 				writeList(i, i + j, m, n, l, 8);
 			}
@@ -233,12 +234,12 @@ public class BMAlgorithm {
 				writeList(i, i + j, m, n, l, 12);
 				writeList(i, i + j, m, n, l, 1);
 				// System.out.println("one position is:" + j);
-				System.out.println("BM算法比较次数:" + count);
+				System.out.println("BM算法比较次数:" + times);
 				return j + 1;
 				// j += bmGs[0];
 			} else {
 				writeList(i, i + j, m, n, l, 13);
-				count++;
+				times++;
 				writeList(i, i + j, m, n, l, 14);
 				writeList(i, i + j, m, n, l, 57);
 				j += Math.max(bmGs[i], getBmBc(String.valueOf(textStr.charAt(i + j)), pLength) - pLength + 1 + i);
@@ -248,7 +249,7 @@ public class BMAlgorithm {
 		}
 		writeList(i, i + j, m, n, l, 17);
 		writeList(i, i + j, m, n, l, 1);
-		System.out.println("BM算法比较次数:" + count);
+		System.out.println("BM算法比较次数:" + times);
 		return -1;
 	}
 
@@ -335,7 +336,9 @@ public class BMAlgorithm {
 	public int getNow() {
 		return now;
 	}
-
+	public int getTimes() {
+		return times;
+	}
 	public int getI() {
 		return i;
 	}

@@ -17,7 +17,7 @@ public class BFAlgorithm {
 	private ArrayList<Character> listCharI, listCharJ; // char可以存储汉字,以为他是Unicode编码,Java中的char占2个字节
 	private int now = 0;
 	private int i = 0, j = 0;
-
+	protected int times = 0;
 	public BFAlgorithm(String textStr, String patternStr) {
 		this.textStr = textStr;
 		this.textStrLength = textStr.length();
@@ -56,7 +56,7 @@ public class BFAlgorithm {
 		now = 0;
 		i = 0;
 		j = 0;
-		int count = 0;
+		
 		for (int k = 1; k <= 4; k++) {
 			writeList(k);
 		}
@@ -78,11 +78,11 @@ public class BFAlgorithm {
 				writeList(12);
 				writeList(4);
 			}
-			count++;
+			times++;
 		}
 		writeList(13);
 		writeList(14);
-		System.out.println("BF算法比较次数：" + count);
+		System.out.println("BF算法比较次数：" + times);
 		if (j == patternStrLength) {
 			writeList(15);
 			writeList(20);
@@ -169,6 +169,10 @@ public class BFAlgorithm {
 
 	public ArrayList<Character> getListCharJ() {
 		return listCharJ;
+	}
+
+	public int getTimes() {
+		return times;
 	}
 
 }
